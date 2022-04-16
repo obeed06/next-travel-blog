@@ -1,0 +1,13 @@
+nav.postToC {
+    position: sticky;
+    position: -webkit-sticky; /* For Safari */
+    top: 24px; /* How far down the page you want your ToC to live */
+
+    /* Give table of contents a scrollbar */
+    max-height: calc(100vh);
+    overflow: auto;
+}
+
+.postToC svg {
+    color: var(--brand-color);
+}

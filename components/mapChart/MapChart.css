@@ -1,0 +1,7 @@
+.mapChart {
+    /*margin-top: -10%;*/
+    margin-bottom: calc(var(--vh,1vh) * -10);
+    width: 100%;
+    height: calc(var(--vh,1vh) * 70 - 90px)!important;
+    min-height: 285px;
+}

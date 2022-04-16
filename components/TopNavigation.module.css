@@ -1,0 +1,15 @@
+.appbar {
+    background-color: rgba(0, 0, 0, 0.5);
+    font-family: var(--font-heading-primary);
+}
+
+.appbarWrapper {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.appbarTitle {
+    margin-top: 0;
+    margin-bottom: 0;
+    flex-grow: 1;
+}

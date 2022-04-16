@@ -1,0 +1,28 @@
+.tripsSection {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding-top: 50px;
+    position: relative;
+    overflow: hidden;
+}
+
+.tripsSection:before {
+    mask: url('/assets/diagonal.svg');
+    -webkit-mask-image: url('/assets/diagonal.svg');
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -74px;
+    width: 100%;
+    min-width: 3400px;
+    height: 280px;
+    backface-visibility: hidden;
+    z-index: 1;
+}
+
+@media screen and (max-width: 600px) {
+    .tripsPostSection:before {
+        height: 125px;
+    }
+}
