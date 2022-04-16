@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const ItineraryMap = ({itinerary, bgOverride}) => {
+const ItineraryMap = ({itinerary, bgOverride = null}) => {
     const classes = useStyles();
     const [isMapLoaded, setIsMapLoaded] = useState(false)
     const parallaxController = useParallaxController();

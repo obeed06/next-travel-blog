@@ -10,7 +10,7 @@ export default class MyDocument extends Document {
             <Html lang="en">
                 <Head>
                     {/* PWA primary color */}
-                    <meta name="theme-color" content={lightTheme.palette.primary.main}/>
+                    <meta name="theme-color" content={darkTheme.palette.primary.main}/>
                     <link rel="shortcut icon" href="/static/favicon.ico"/>
                     <link
                         rel="stylesheet"
@@ -23,7 +23,7 @@ export default class MyDocument extends Document {
                         rel="stylesheet"/>
                     <link href="https://fonts.cdnfonts.com/css/molot" rel="stylesheet"/>
                     {/* Inject MUI styles first to match with the prepend: true configuration. */}
-                    {this.props.emotionStyleTags}
+                    {/*{this.props.emotionStyleTags}*/}
                 </Head>
                 <body>
                 <Main/>

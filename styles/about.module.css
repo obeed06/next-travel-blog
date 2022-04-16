@@ -1,0 +1,75 @@
+.landingAbout {
+    height: 80vh;
+    background-image: url('/assets/bg-bolivia-train.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    opacity: 0.75;
+    overflow: hidden;
+}
+
+.landingAbout:after {
+    mask: url('/assets/diagonal.svg');
+    -webkit-mask-image: url('/assets/diagonal.svg');
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    transform: translateX(-50%);
+    content: '';
+    bottom: -4px;
+    width: 100%;
+    min-width: 2400px;
+    backface-visibility: hidden;
+    height: 275px;
+    background-size: cover;
+}
+
+@media screen and (max-width: 600px) {
+    .landingAbout:after {
+        height: 125px;
+    }
+}
+
+.landingAbout h1 {
+    font-family: var(--font-signature);
+    font-weight: lighter;
+    color: white;
+    text-align: center;
+    letter-spacing: 0.1ch;
+}
+
+.aboutHeading {
+    text-transform: uppercase;
+    color: #fff;
+    font-size: 4.5rem;
+}
+
+.aboutSubHeading {
+    text-transform: uppercase;
+    color: #fff;
+    font-size: 2rem;
+}
+
+.statTitle {
+    text-transform: uppercase;
+    font-family: var(--font-heading-primary);
+    font-weight: lighter;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.statNumber {
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    font-family: var(--font-heading-secondary);
+    font-weight: bold;
+    font-style: normal;
+    display: inline-block;
+    overflow: hidden;
+    font-size: 80px;
+    line-height: 100%;
+    color: var(--brand-color);
+}

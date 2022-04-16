@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -13,8 +13,12 @@ import ListItem from "@mui/material/ListItem";
 import Avatar from "@mui/material/Avatar";
 import Tooltip from "@mui/material/Tooltip";
 import Stack from "@mui/material/Stack";
+import ColorModeContext from "../src/ColorModeContext";
+import {useTheme} from "@mui/styles";
 
 const Footer = (props: any) => {
+    const theme = useTheme();
+    const { darkMode, setDarkMode } = useContext(ColorModeContext);
     return (
         <Box className="siteFooter" sx={{ width: '100%' }}>
             <Grid container direction="row" justifyContent="space-around"  spacing={{xs: 1, md: 3}} sx={{py:5}}>
@@ -47,8 +51,8 @@ const Footer = (props: any) => {
                     </Tooltip>
                 </Stack>
                 <Grid item>
-                    <IconButton sx={{ ml: 1 }} onClick={props.toggleTheme as any} color="inherit">
-                        <Chip icon={props.selectedTheme === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />} label={props.selectedTheme === 'dark' ? 'Light Mode' : 'Dark Mode'} />
+                    <IconButton sx={{ ml: 1 }} onClick={() => setDarkMode(!darkMode)} color="inherit">
+                        <Chip icon={theme.palette.mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />} label={theme.palette.mode === "dark" ? 'Light Mode' : 'Dark Mode'} />
                     </IconButton>
                 </Grid>
             </Grid>

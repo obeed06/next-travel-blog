@@ -1,6 +1,5 @@
 import * as React from 'react';
 import styles from './TopNavigation.module.css'
-import CssBaseline from '@mui/material/CssBaseline';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import Slide from '@mui/material/Slide';
 import AppBar from "@mui/material/AppBar";
@@ -18,6 +17,9 @@ import Chip from "@mui/material/Chip";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
+import {useTheme} from "@mui/styles";
+import {useContext} from "react";
+import ColorModeContext from "../src/ColorModeContext";
 
 const pages = [{
     title: 'Destinations',
@@ -44,6 +46,8 @@ function HideOnScroll(props) {
 }
 
 const TopNavigation = props => {
+    const theme = useTheme();
+    const { darkMode, setDarkMode } = useContext(ColorModeContext);
     const [mobileNavOpen, setMobileNavOpen] = React.useState(false);
     // const container = window !== undefined ? () => window.document.body : undefined;
 
@@ -63,9 +67,9 @@ const TopNavigation = props => {
                 ))}
             </List>
             <Divider/>
-            <IconButton sx={{ml: 1}} onClick={props.toggleTheme as any} color="inherit">
-                <Chip icon={props.selectedTheme === 'dark' ? <Brightness7Icon/> : <Brightness4Icon/>}
-                      label={props.selectedTheme === 'dark' ? 'Light Mode' : 'Dark Mode'}/>
+            <IconButton sx={{ml: 1}} onClick={() => setDarkMode(!darkMode)} color="inherit">
+                <Chip icon={theme.palette.mode === "dark" ? <Brightness7Icon/> : <Brightness4Icon/>}
+                      label={theme.palette.mode === "dark" ? 'Light Mode' : 'Dark Mode'}/>
             </IconButton>
         </>
     );
@@ -73,7 +77,6 @@ const TopNavigation = props => {
 
     return (
         <React.Fragment>
-            <CssBaseline/>
             <HideOnScroll>
                 <AppBar className={styles.appbar} elevation={0}>
                     <Toolbar className={styles.appbarWrapper} disableGutters sx={{
