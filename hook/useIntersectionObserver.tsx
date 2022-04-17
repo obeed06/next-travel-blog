@@ -1,6 +1,5 @@
 import {useEffect, useState} from 'react'
 
-
 function useIntersectionObserver(elementRef,
                                  {
                                      threshold = 0,

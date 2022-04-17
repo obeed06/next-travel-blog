@@ -41,7 +41,7 @@ export default function PostCard({post}) {
               onMouseOver={() => setState({raised: true, shadow: 3})}
               onMouseOut={() => setState({raised: false, shadow: 1})}
               raised={state.raised} zdepth={state.shadow}>
-            <CardActionArea href={"/post/" + post.slug} key={post.slug}>
+            <CardActionArea href={"/posts/" + post.slug} key={post.slug}>
                 <CardMedia
                     className={classes.media}
                     image={post.mainImage.asset.url}

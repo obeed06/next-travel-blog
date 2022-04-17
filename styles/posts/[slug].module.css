@@ -1,0 +1,41 @@
+.postLanding {
+    height: calc(var(--vh,1vh) * 100 + -70px)!important;
+    min-height: 500px;
+    max-height: 1000px;
+    background-color: darkgrey;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.postLanding h1 {
+    font-family: var(--font-signature);
+    font-weight: lighter;
+    color: white;
+    text-align: center;
+    letter-spacing: 0.1ch;
+}
+
+@media screen and (max-width: 992px) {
+    .postLanding {
+        max-height: 850px;
+    }
+}
+
+.postLanding:after {
+    mask: url('../../public/assets/curve.svg');
+    -webkit-mask-image: url('../../public/assets/curve.svg');
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    transform: translateX(-50%);
+    content: '';
+    bottom: -1px;
+    width: 100%;
+    min-width: 550px;
+    backface-visibility: hidden;
+    height: 50px;
+}
+

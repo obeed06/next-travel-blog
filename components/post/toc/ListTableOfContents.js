@@ -1,4 +1,4 @@
-import './ListTableOfContents.css'
+import styles from './ListTableOfContents.module.css'
 import React, {useState} from 'react';
 import useHeadingIntersectionObserver from "../../../hook/useHeadingIntersectionObserver";
 import List from "@mui/material/List";
@@ -14,7 +14,7 @@ const ListTableOfContents = ({nestedHeadings, idPrefix}) => {
     return (
         <>
             {nestedHeadings && nestedHeadings.length > 0 ? (
-                <List className="postToC" aria-label="Table of contents">
+                <List className={styles.postToC} aria-label="Table of contents">
                     {nestedHeadings.map((heading, i) => (
                         <>
                             <ListItem key={idPrefix + "-" + heading.id} disablePadding>
