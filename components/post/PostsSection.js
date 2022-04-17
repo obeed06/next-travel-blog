@@ -23,7 +23,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PostsSection({posts}) {
     const classes = useStyles();
-    const checked = useWindowPosition("mapSection");
 
     if (!posts) return <div>Loading...</div>;
     let featuredPosts = posts.filter(p => {
@@ -47,7 +46,7 @@ export default function PostsSection({posts}) {
                 <FeaturedPosts featuredPostsData={featuredPosts} headingTitle="Featured."/>
             </Box>
             <Box sx={{marginTop: "-15px"}}>
-                <PostsGrid postsData={recentPosts} checked={checked} actions={olderPostBtn}
+                <PostsGrid postsData={recentPosts} checked={true} actions={olderPostBtn}
                            header={
                                <Container maxWidth='lg'>
                                    <Parallax translateY={['0', '+48']}>
