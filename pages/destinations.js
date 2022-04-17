@@ -16,6 +16,9 @@ import SkeletonHeroPostCard from "../components/post/SkeletonHeroPostCard";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Divider from "@mui/material/Divider";
+import Meta from "../components/Meta";
+import urlBuilder from "@sanity/image-url";
+import {getClient} from "../lib/sanity";
 
 const Destinations = ({destinations, continents, preview}) => {
     const [q, setQ] = useState("");
@@ -32,75 +35,78 @@ const Destinations = ({destinations, continents, preview}) => {
         }
     };
 
-    return <HeaderAndFooter>
-        {
-            <Box id="destinations" className="section" sx={{py: 5}}>
-                <Container maxWidth='lg'>
-                    <Box>
-                        {
-                            destinations ?
-                                <MapChart
-                                    visitedGeos={searchDestinations(destinations, q, qType).map((d, i) => d.name)}/>
-                                :
-                                <SkeletonHeroPostCard/>
+    return <>
+        <Meta title={"Find a place to visit | Where's Obee Blog"} />
+        <HeaderAndFooter>
+            {
+                <Box id="destinations" className="section" sx={{py: 5}}>
+                    <Container maxWidth='lg'>
+                        <Box>
+                            {
+                                destinations ?
+                                    <MapChart
+                                        visitedGeos={searchDestinations(destinations, q, qType).map((d, i) => d.name)}/>
+                                    :
+                                    <SkeletonHeroPostCard/>
 
-                        }
-                    </Box>
-                    <Grid container direction="row" justifyContent="center" alignItems="center">
-                        <Grid item xs={12} md={8}>
-                            <FormControl fullWidth sx={{m: 1}}>
-                                <OutlinedInput
-                                    onChange={(e) => {
-                                        setSelectedRegion("All");
-                                        setQType("search")
-                                        setQ(e.target.value);
-                                    }}
-                                    endAdornment={<InputAdornment position="start"><SearchIcon/></InputAdornment>}
-                                    placeholder="Search for a destination"
-                                />
-                            </FormControl>
+                            }
+                        </Box>
+                        <Grid container direction="row" justifyContent="center" alignItems="center">
+                            <Grid item xs={12} md={8}>
+                                <FormControl fullWidth sx={{m: 1}}>
+                                    <OutlinedInput
+                                        onChange={(e) => {
+                                            setSelectedRegion("All");
+                                            setQType("search")
+                                            setQ(e.target.value);
+                                        }}
+                                        endAdornment={<InputAdornment position="start"><SearchIcon/></InputAdornment>}
+                                        placeholder="Search for a destination"
+                                    />
+                                </FormControl>
+                            </Grid>
                         </Grid>
-                    </Grid>
-                    <Box sx={{pb: 5}}>
-                        {
-                            continents ?
-                                <Tabs
-                                    value={selectedRegion}
-                                    onChange={handleTabChange}
-                                    variant="scrollable"
-                                    scrollButtons="auto"
-                                    aria-label="scrollable auto tabs example"
-                                >
-                                    <Tab key="all-continents" label="All" value="All"/>
-                                    <Divider sx={{mx: 1}} orientation="vertical" variant="middle" flexItem/>
-                                    {continents.map((c, i) => <Tab data-type="continent"
-                                                                   key={c?.name + "-filter"} value={c?.name}
-                                                                   label={c?.name}/>)
-                                    }
-                                    <Divider sx={{mx: 1}} orientation="vertical" variant="middle" flexItem/>
-                                    {
-                                        continents.flatMap((c, i) => c.regions)
-                                            .map((c, i) => <Tab
-                                                data-type="sub-region" key={c?.name + "-filter"} value={c?.name}
-                                                label={c?.name}/>)
+                        <Box sx={{pb: 5}}>
+                            {
+                                continents ?
+                                    <Tabs
+                                        value={selectedRegion}
+                                        onChange={handleTabChange}
+                                        variant="scrollable"
+                                        scrollButtons="auto"
+                                        aria-label="scrollable auto tabs example"
+                                    >
+                                        <Tab key="all-continents" label="All" value="All"/>
+                                        <Divider sx={{mx: 1}} orientation="vertical" variant="middle" flexItem/>
+                                        {continents.map((c, i) => <Tab data-type="continent"
+                                                                       key={c?.name + "-filter"} value={c?.name}
+                                                                       label={c?.name}/>)
+                                        }
+                                        <Divider sx={{mx: 1}} orientation="vertical" variant="middle" flexItem/>
+                                        {
+                                            continents.flatMap((c, i) => c.regions)
+                                                .map((c, i) => <Tab
+                                                    data-type="sub-region" key={c?.name + "-filter"} value={c?.name}
+                                                    label={c?.name}/>)
 
-                                    }
-                                </Tabs>
-                                :
-                                <></>
-                        }
-                        <Divider/>
-                    </Box>
-                    <Parallax translateY={['0', '+48']}>
-                        <Typography vairant="h1" component="h2" className="sectionHeader">
-                            Destinations.
-                        </Typography>
-                    </Parallax>
-                </Container>
-                <DestinationGrid destinations={destinations && searchDestinations(destinations, q, qType)}/>
-            </Box>
-        }
-    </HeaderAndFooter>
+                                        }
+                                    </Tabs>
+                                    :
+                                    <></>
+                            }
+                            <Divider/>
+                        </Box>
+                        <Parallax translateY={['0', '+48']}>
+                            <Typography vairant="h1" component="h2" className="sectionHeader">
+                                Destinations.
+                            </Typography>
+                        </Parallax>
+                    </Container>
+                    <DestinationGrid destinations={destinations && searchDestinations(destinations, q, qType)}/>
+                </Box>
+            }
+        </HeaderAndFooter>
+    </>
 };
 
 function searchDestinations(destinations, q, qType) {

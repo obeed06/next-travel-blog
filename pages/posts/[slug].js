@@ -20,6 +20,9 @@ import HeaderAndFooter from "../../components/HeaderAndFooter";
 import TableOfContentsDrawer from "../../components/post/toc/TableOfContentsDrawer";
 import FeaturedPosts from "../../components/post/FeaturedPosts";
 import Button from "@mui/material/Button";
+import Meta from "../../components/Meta";
+import {getClient} from "../../lib/sanity";
+import urlBuilder from "@sanity/image-url";
 
 const useStyles = makeStyles((theme) => ({
     postLanding: {
@@ -36,68 +39,71 @@ export default function Post({post, nestedHeadings, preview}) {
     const postBodyTopRef = useRef(null)
     const postBodyBottomRef = useRef(null)
 
-    return <HeaderAndFooter>
-        {
-            typeof (post) !== 'undefined' && post !== null ? (
-                <Box>
-                    {/*<Meta type="article" title={post.title} description={post.summary}*/}
-                    {/*      // path={location.pathname}*/}
-                    {/*      image={urlBuilder(getClient(false))*/}
-                    {/*          .image(post?.mainImage)*/}
-                    {/*          .fit('crop')*/}
-                    {/*          .width(1200)*/}
-                    {/*          .height(630)*/}
-                    {/*          .url()} />*/}
-                    <Box className={`${classes.postLanding} ${styles.postLanding}`}
-                         style={{backgroundImage: "linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2)), url(" + post?.mainImage?.asset?.url + ")"}}>
-                        <Grid sx={{height: "100%"}} container direction="column" justifyContent="center"
-                              alignItems="center">
-                            <Stack direction="column" justifyContent="flex-end" alignItems="center" spacing={1}
-                                   style={{height: "80%"}}>
-                                <Typography
-                                    gutterBottom
-                                    variant="h3"
-                                    component="h1"
-                                >
-                                    {post.title}
-                                </Typography>
-                                <Divider style={{borderColor: "rgba(255, 255, 255, 0.15)", width: "75%"}}/>
-                                <span
-                                    className={styles.postCardAuthor}>By {post.author.name} on {Moment(post.publishedAt).format('DD MMMM YYYY')}</span>
-                            </Stack>
-                        </Grid>
-                    </Box>
-                    <Container maxWidth='md' sx={{my: 5}}>
-                        <DestinationBreadcrumbs destinations={post?.destinations}/>
-                        <Grid container spacing={2}>
-                            <Grid item xs={12} md={8}>
-                                <Box ref={postBodyBottomRef}>
-                                    <span ref={postBodyTopRef}></span>
-                                    <PortableText value={post?.body}/>
-                                </Box>
+    return <>
+        <Meta type="article" title={post.title + " | Where's Obee Blog"} description={post.summary}
+              image={urlBuilder(getClient(false))
+                  .image(post?.mainImage)
+                  .fit('crop')
+                  .width(1200)
+                  .height(630)
+                  .url()} />
+        <HeaderAndFooter>
+            {
+                typeof (post) !== 'undefined' ? (
+                    <Box>
+
+                        <Box className={`${classes.postLanding} ${styles.postLanding}`}
+                             style={{backgroundImage: "linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2)), url(" + post?.mainImage?.asset?.url + ")"}}>
+                            <Grid sx={{height: "100%"}} container direction="column" justifyContent="center"
+                                  alignItems="center">
+                                <Stack direction="column" justifyContent="flex-end" alignItems="center" spacing={1}
+                                       style={{height: "80%"}}>
+                                    <Typography
+                                        gutterBottom
+                                        variant="h3"
+                                        component="h1"
+                                    >
+                                        {post.title}
+                                    </Typography>
+                                    <Divider style={{borderColor: "rgba(255, 255, 255, 0.15)", width: "75%"}}/>
+                                    <span
+                                        className={styles.postCardAuthor}>By {post.author.name} on {Moment(post.publishedAt).format('DD MMMM YYYY')}</span>
+                                </Stack>
                             </Grid>
-                        </Grid>
-                        <ChipCategories categories={post?.categories}/>
-                    </Container>
-                    <Container maxWidth='lg'>
-                        {/*<Comments comments={post.comments} />*/}
-                        {/*<Form _id={post._id} />*/}
-                        <FeaturedPosts featuredPostsData={post?.relatedPosts} headingTitle="Related Posts."/>
-                    </Container>
-                    <TableOfContentsDrawer nestedHeadings={nestedHeadings} intersectTopRef={postBodyTopRef}
-                                           intersectBottomRef={postBodyBottomRef}/>
-                </Box>
-            ) : (
-                <Box>
-                    <Box className={styles.postLanding}>
-                        <Grid sx={{height: "100%"}} container direction="row" justifyContent="center" alignItems="end">
-                            <Skeleton sx={{mb: 5}} height={80} width={"40%"}/>
-                        </Grid>
+                        </Box>
+                        <Container maxWidth='md' sx={{my: 5}}>
+                            <DestinationBreadcrumbs destinations={post?.destinations}/>
+                            <Grid container spacing={2}>
+                                <Grid item xs={12} md={8}>
+                                    <Box ref={postBodyBottomRef}>
+                                        <span ref={postBodyTopRef}></span>
+                                        <PortableText value={post?.body}/>
+                                    </Box>
+                                </Grid>
+                            </Grid>
+                            <ChipCategories categories={post?.categories}/>
+                        </Container>
+                        <Container maxWidth='lg'>
+                            {/*<Comments comments={post.comments} />*/}
+                            {/*<Form _id={post._id} />*/}
+                            <FeaturedPosts featuredPostsData={post?.relatedPosts} headingTitle="Related Posts."/>
+                        </Container>
+                        <TableOfContentsDrawer nestedHeadings={nestedHeadings} intersectTopRef={postBodyTopRef}
+                                               intersectBottomRef={postBodyBottomRef}/>
                     </Box>
-                </Box>
-            )
-        }
-    </HeaderAndFooter>
+                ) : (
+                    <Box>
+                        <Box className={styles.postLanding}>
+                            <Grid sx={{height: "100%"}} container direction="row" justifyContent="center" alignItems="end">
+                                <Skeleton sx={{mb: 5}} height={80} width={"40%"}/>
+                            </Grid>
+                        </Box>
+                    </Box>
+                )
+            }
+        </HeaderAndFooter>
+    </>
+
 
 };
 

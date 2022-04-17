@@ -15,6 +15,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
 import Container from "@mui/material/Container";
 import {useRouter} from "next/router";
+import Meta from "../components/Meta";
 
 const Posts = ({posts, categories,  preview}) => {
     const [selectedCategory, setSelectedCategory] = useState("All");
@@ -80,12 +81,15 @@ const Posts = ({posts, categories,  preview}) => {
         </Container>
     )
 
-    return <HeaderAndFooter>
-        {postFilter}
-        <Box id="postsSection" className="section" sx={{pb: 5}}>
-            <PostsGrid postsData={searchPosts(posts, q, qType)} checked={true}/>
-        </Box>
-    </HeaderAndFooter>
+    return <>
+        <Meta title={"Read about my travels | Where's Obee Blog"} />
+        <HeaderAndFooter>
+            {postFilter}
+            <Box id="postsSection" className="section" sx={{pb: 5}}>
+                <PostsGrid postsData={searchPosts(posts, q, qType)} checked={true}/>
+            </Box>
+        </HeaderAndFooter>
+    </>
 };
 
 

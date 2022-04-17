@@ -16,50 +16,64 @@ import {Link as Scroll} from "react-scroll";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import {deepOrange} from "@mui/material/colors";
+import Meta from "../../components/Meta";
+import urlBuilder from "@sanity/image-url";
+import {getClient} from "../../lib/sanity";
 
 export default function Destination({destination, relatedPosts, preview}) {
     const themeProps = useTheme();
-    return <HeaderAndFooter>
-        {
-            typeof (destination) !== 'undefined' && destination !== null ? (
-                <Box>
-                    <Box className={styles.destinationLanding}
-                         style={{backgroundImage: "linear-gradient(to bottom, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0.5), " + themeProps.palette.background.default + "), url(" + destination?.bgImage?.asset?.url + ")"}}>
-                        <Grid sx={{height: "100%"}} container direction="column" justifyContent="center"
-                              alignItems="center">
-                            <Grid item className="dIcon" style={{width: '60%', height: '60%'}}>
-                                <div className="dIconBg"
-                                     style={{backgroundImage: "url(" + destination?.icon?.asset?.url + ")"}}></div>
-                                <Typography vairant="h1" component="h1"  style={{
-                                    position: 'absolute',
-                                    top: '50%',
-                                    left: '50%',
-                                    transform: 'translate(-50%, -50%)'
-                                }}>
-                                    {destination?.name}
-                                </Typography>
-                            </Grid>
-                            <Grid item>
-                                <Scroll to="destination-content" smooth={true}>
-                                    <Button variant="contained"
-                                            endIcon={<ArrowDownwardIcon/>}>Explore {destination?.name}</Button>
-                                </Scroll>
+    return <>
+        <Meta title={"Explore " + destination.name + " | Where's Obee Blog"} description={destination.summary}
+              image={urlBuilder(getClient(false))
+                  .image(destination?.bgImage)
+                  .fit('crop')
+                  .width(1200)
+                  .height(630)
+                  .url()} />
+        <HeaderAndFooter>
+            {
+                typeof (destination) !== 'undefined' && destination !== null ? (
+                    <Box>
+                        <Box className={styles.destinationLanding}
+                             style={{backgroundImage: "linear-gradient(to bottom, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0.5), " + themeProps.palette.background.default + "), url(" + urlBuilder(getClient(false))
+                                     .image(destination?.bgImage)
+                                     .blur(30)
+                                     .url() + ")"}}>
+                            <Grid sx={{height: "100%"}} container direction="column" justifyContent="center"
+                                  alignItems="center">
+                                <Grid item className="dIcon" style={{width: '60%', height: '60%'}}>
+                                    <div className="dIconBg"
+                                         style={{backgroundImage: "url(" + destination?.icon?.asset?.url + ")"}}></div>
+                                    <Typography vairant="h1" component="h1"  style={{
+                                        position: 'absolute',
+                                        top: '50%',
+                                        left: '50%',
+                                        transform: 'translate(-50%, -50%)'
+                                    }}>
+                                        {destination?.name}
+                                    </Typography>
+                                </Grid>
+                                <Grid item>
+                                    <Scroll to="destination-content" smooth={true}>
+                                        <Button variant="contained"
+                                                endIcon={<ArrowDownwardIcon/>}>Explore {destination?.name}</Button>
+                                    </Scroll>
 
+                                </Grid>
                             </Grid>
-                        </Grid>
-                    </Box>
-                    <Container maxWidth='lg' id="destination-content">
-                        <Tabs variant="scrollable"
-                              scrollButtons="auto"
-                              aria-label="related destinations links">
-                            {getPickRegions(destination?.continent, destination?.regions)}
-                            {getPickCountries(destination?.countries)}
-                            {getPickTrips(destination?.trips)}
-                        </Tabs>
+                        </Box>
+                        <Container maxWidth='lg' id="destination-content">
+                            <Tabs variant="scrollable"
+                                  scrollButtons="auto"
+                                  aria-label="related destinations links">
+                                {getPickRegions(destination?.continent, destination?.regions)}
+                                {getPickCountries(destination?.countries)}
+                                {getPickTrips(destination?.trips)}
+                            </Tabs>
 
-                        <Divider/>
-                    </Container>
-                    <span className="sections">
+                            <Divider/>
+                        </Container>
+                        <span className="sections">
                         <Box id="postsSection" className="section" sx={{py: 5}}>
                             <PostsGrid postsData={relatedPosts} checked={true}
                                        header={
@@ -70,19 +84,22 @@ export default function Destination({destination, relatedPosts, preview}) {
                             />
                         </Box>
                     </span>
-                </Box>
-            ) : (
-                <Box>
-                    <Box className={styles.destinationLanding}>
-                        <Grid sx={{height: "100%"}} container direction="row" justifyContent="center"
-                              alignItems="center">
-                            <Skeleton height={80} width={"40%"}/>
-                        </Grid>
                     </Box>
-                </Box>)
-        }
+                ) : (
+                    <Box>
+                        <Box className={styles.destinationLanding}>
+                            <Grid sx={{height: "100%"}} container direction="row" justifyContent="center"
+                                  alignItems="center">
+                                <Skeleton height={80} width={"40%"}/>
+                            </Grid>
+                        </Box>
+                    </Box>)
+            }
 
-    </HeaderAndFooter>
+        </HeaderAndFooter>
+    </>
+
+
 };
 
 function LinkTab(props) {

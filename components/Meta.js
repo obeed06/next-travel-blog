@@ -1,9 +1,12 @@
 import React from 'react';
-import Helmet from "react-helmet";
+import Head from 'next/head'
+import {useRouter} from "next/router";
 
 const Meta = props => {
-    return (
-        <Helmet>
+        const { asPath } = useRouter()
+
+        return (
+        <Head>
             <title>{props.title}</title>
             <meta name="description" content={props.title} />
             <meta name="keywords" content={props.keywords} />
@@ -14,15 +17,15 @@ const Meta = props => {
             <meta property="og:description" content={props.description} />
             <meta property="og:image" content={props.image} />
             <meta property="og:type" content={props.type} />
-            <meta property="og:url" content={props.domain + props.path} />
+            <meta property="og:url" content={props.domain + asPath} />
             {/* Twitter Meta Tags*/}
             <meta name="twitter:card" content="summary_large_image" />
             <meta property="twitter:domain" content="wheresobee.blog" />
-            <meta property="twitter:url" content={props.domain + props.path} />
+            <meta property="twitter:url" content={props.domain + asPath} />
             <meta name="twitter:title" content={props.title} />
             <meta name="twitter:description" content={props.description} />
             <meta name="twitter:image" content={props.image} />
-        </Helmet>
+        </Head>
     );
 };
 
@@ -33,7 +36,6 @@ Meta.defaultProps = {
         image: "https://www.wheresobee.blog/social-thumbnail.jpg",
         type: "website",
         domain: "https://www.wheresobee.blog",
-        path: "/"
 };
 
 export default Meta;
