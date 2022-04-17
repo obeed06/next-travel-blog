@@ -2,7 +2,7 @@ import React from 'react';
 import {hyphenate} from "../pages/api/postUtils";
 import {getImageDimensions} from "@sanity/asset-utils";
 import urlBuilder from "@sanity/image-url";
-import {getClient} from "../pages/api/client";
+import {getClient} from "../pages/api/sanity";
 import Link from "../src/Link";
 
 const DefaultBlockContent = {

@@ -3,27 +3,13 @@ import Trips from "../components/trip/Trips";
 import ItineraryMap from "../components/trip/ItineraryMap";
 import WelcomeParallax from "../components/WelcomeParallax";
 import PostsSection from "../components/post/PostsSection";
-import {getRecentPosts} from "./api/postApi";
-import {getHomeItinerary} from "./api/itineraryApi";
-import {getTrips} from "./api/tripApi";
+import {getRecentPosts} from "../lib/postApi";
+import {getHomeItinerary} from "../lib/itineraryApi";
+import {getTrips} from "../lib/tripApi";
 import HeaderAndFooter from "../components/HeaderAndFooter";
-import React, { useState, useEffect } from "react";
+import React from "react";
 
-const index = (preview: false) => {
-  const [trips, setTrips] = useState(null);
-  const [itinerary, setItinerary] = useState(null);
-  const [recentPosts, setRecentPosts] = useState(null);
-  useEffect(() => {
-      getHomeItinerary(preview)
-          .then((data) => setItinerary(data))
-          .catch(console.error);
-      getRecentPosts(preview)
-          .then((data) => setRecentPosts(data))
-          .catch(console.error);
-      getTrips(preview)
-          .then((data) => setTrips(data))
-          .catch(console.error);
-  }, [preview]);
+export default function index({trips, itinerary, recentPosts, preview}) {
   const containerRef = React.useRef(null);
   return (
       <HeaderAndFooter>
@@ -38,4 +24,13 @@ const index = (preview: false) => {
   );
 }
 
-export default index;
+export async function getStaticProps({ preview = false }) {
+    const trips = await getTrips(preview)
+    const itinerary = await getHomeItinerary(preview)
+    const recentPosts = await getRecentPosts(preview)
+
+    return {
+        props: { trips, itinerary, recentPosts, preview },
+        revalidate: 1
+    }
+}

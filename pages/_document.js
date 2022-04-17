@@ -53,7 +53,7 @@ MyDocument.getInitialProps = async (ctx) => {
     // 3. page.render
     // 4. document.render
     //
-    // On the client
+    // On the sanity
     // 1. app.getInitialProps
     // 2. page.getInitialProps
     // 3. app.render

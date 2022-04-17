@@ -11,7 +11,7 @@ import Moment from "moment";
 import Typed from "typed.js";
 import Avatar from "@mui/material/Avatar";
 import {PortableText} from "@portabletext/react";
-import {getAuthorDetails} from "./api/authorApi";
+import {getAuthorDetails} from "../lib/authorApi";
 import HeaderAndFooter from "../components/HeaderAndFooter";
 
 const useStyles = makeStyles((theme) => ({
@@ -22,19 +22,13 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const About = ({preview = false}) => {
+export default function About({author, preview}) {
     Moment.locale('en')
     const classes = useStyles();
     const containerRef = useRef(null);
     const el = useRef(null);
-    const [authorData, setAuthorData] = useState(null);
-
 
     useEffect(() => {
-        getAuthorDetails(preview)
-            .then((data) => setAuthorData(data))
-            .catch(console.error);
-
         const typed = new Typed(el.current, {
             strings: ["Backend Developer", "Frontend Developer?", "Backpacker", "Blogger?"],
             startDelay: 300,
@@ -62,7 +56,7 @@ const About = ({preview = false}) => {
                     </Typography>
                 </Grid>
             </Box>
-            {authorData ? (
+            {author ? (
                 <Container maxWidth='md'>
                     <Stack direction={{xs: 'column', sm: 'row'}}
                            divider={<Divider style={{marginLeft: "5px", marginRight: "5px"}} orientation="vertical"
@@ -73,24 +67,24 @@ const About = ({preview = false}) => {
                             <Typography className={styles.statTitle} vairant="h5" component="h5">
                                 Countries Visited:
                             </Typography>
-                            <em className={styles.statNumber}>{authorData?.destinationCount}+</em>
+                            <em className={styles.statNumber}>{author?.destinationCount}+</em>
                         </div>
                         <div>
                             <Typography className={styles.statTitle} vairant="h5" component="h5">
                                 Years Travelled:
                             </Typography>
-                            <em className={styles.statNumber}>{new Date().getFullYear() - Moment(authorData?.earliestTrip?.tripDate).year()}+</em>
+                            <em className={styles.statNumber}>{new Date().getFullYear() - Moment(author?.earliestTrip?.tripDate).year()}+</em>
                         </div>
                         <div>
                             <Typography className={styles.statTitle} vairant="h5" component="h5">
                                 Posts Written:
                             </Typography>
-                            <em className={styles.statNumber}>{authorData?.postCount}</em>
+                            <em className={styles.statNumber}>{author?.postCount}</em>
                         </div>
                     </Stack>
 
                     <Box sx={{py: 5}}>
-                        <PortableText  value={authorData?.bio}  />
+                        <PortableText  value={author?.bio}  />
                     </Box>
                 </Container>
             ) : (
@@ -100,4 +94,11 @@ const About = ({preview = false}) => {
     );
 };
 
-export default About;
+export async function getStaticProps({ preview = false }) {
+    const author = await getAuthorDetails(preview)
+
+    return {
+        props: { author, preview },
+        revalidate: 1
+    }
+}

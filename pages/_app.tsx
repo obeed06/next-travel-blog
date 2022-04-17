@@ -1,5 +1,5 @@
 import '../styles/globals.css'
-import {ThemeProvider, createTheme} from "@mui/material/styles";
+import {ThemeProvider} from "@mui/material/styles";
 import React, {useEffect, useState} from "react";
 import {ParallaxProvider} from "react-scroll-parallax";
 import {config} from '@fortawesome/fontawesome-svg-core'
@@ -22,10 +22,6 @@ library.add(fab, faCheckSquare, faCoffee)
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
-
-function getActiveTheme(themeMode: 'light' | 'dark') {
-    return themeMode === 'light' ? lightTheme : darkTheme;
-}
 
 function MyApp(props) {
     const {Component, emotionCache = clientSideEmotionCache, pageProps} = props;
