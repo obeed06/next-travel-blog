@@ -37,7 +37,7 @@ const WelcomeParallax = () => {
         children: (
             <div className={`${styles.inset} ${styles.center}`}>
                 <Typography vairant="h1" component="h2" className={`${styles.subHeadline} brandColor`}>
-                    WHERE'S OBEE
+                    WHERE&apos;S OBEE
                 </Typography>
             </div>
         )

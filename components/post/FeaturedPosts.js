@@ -26,7 +26,7 @@ export default function FeaturedPosts({featuredPostsData, headingTitle}) {
                     ) :
                     (
                         [...Array(4)].map((e, i) => (
-                            <SkeletonPostCard />
+                            <SkeletonPostCard key={i}/>
                         ))
                     )
                 }

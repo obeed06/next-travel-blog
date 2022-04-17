@@ -20,6 +20,7 @@ import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import {useTheme} from "@mui/styles";
 import {useContext} from "react";
 import ColorModeContext from "../src/ColorModeContext";
+import Image from "next/image";
 
 const pages = [{
     title: 'Destinations',
@@ -47,7 +48,7 @@ function HideOnScroll(props) {
 
 const TopNavigation = props => {
     const theme = useTheme();
-    const { darkMode, setDarkMode } = useContext(ColorModeContext);
+    const {darkMode, setDarkMode} = useContext(ColorModeContext);
     const [mobileNavOpen, setMobileNavOpen] = React.useState(false);
     // const container = window !== undefined ? () => window.document.body : undefined;
 
@@ -60,11 +61,11 @@ const TopNavigation = props => {
             <Toolbar/>
             <Divider/>
             <List sx={{flexGrow: 1, height: "100%"}}>
-                {pages.map((page, index) => (
+                {pages.map((page, index) =>
                     <ListItemButton key={"mobile-nav-" + page.title}>
                         <Link href={page.href} underline="none"><ListItemText primary={page.title}/></Link>
                     </ListItemButton>
-                ))}
+                )}
             </List>
             <Divider/>
             <IconButton sx={{ml: 1}} onClick={() => setDarkMode(!darkMode)} color="inherit">
@@ -84,9 +85,10 @@ const TopNavigation = props => {
                         justifyContent: {xs: 'center', md: 'flex-start'}
                     }}>
                         {/*Desktop Logo*/}
-                        <Link sx={{mr: 2, display: {xs: 'none', md: 'flex'}}} href="/"><img
-                            style={{height: "65px", width: "65px"}}
-                            src={'/assets/logo-with-title.png'} alt="logo with title"/></Link>
+                        <Link sx={{mr: 2, display: {xs: 'none', md: 'flex'}}} href="/">
+                            <Image height="65px" width="65px" src={'/assets/logo-with-title.png'}
+                                   alt="logo with title"/>
+                        </Link>
 
                         {/*Mobile hamburger icon*/}
                         <Box sx={{flexGrow: 1, display: {xs: 'flex', md: 'none'}, alignSelf: {xs: 'flex-start'}}}>
@@ -121,7 +123,7 @@ const TopNavigation = props => {
                             position: {xs: 'absolute', md: ''},
                             top: {xs: '25px', md: ''}
                         }} href="/">
-                            <img style={{height: "65px", width: "65px"}}
+                            <Image height="65px" width="65px"
                                  src={'/assets/logo-with-title.png'}
                                  alt="logo with title"/>
                         </Link>

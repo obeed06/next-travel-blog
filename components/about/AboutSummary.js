@@ -10,8 +10,8 @@ const AboutSummary = () => {
             <Typography vairant="h1" component="h2" className="sectionHeader myStoryHeader brandColor" >
                 MY STORY.
             </Typography>
-            <Container maxWidth='sm'>
-                <p className={styles.subHeading}>I'm David Obee, a software developer based in the UK. <br/>Welcome to my blog, this my space to practice my frontend skills and emerging technologies while documenting my solo travelling experiences.</p>
+            <Container maxWidth="sm">
+                <p className={styles.subHeading}>I&apos;m David Obee, a software developer based in the UK. <br/>Welcome to my blog, this my space to practice my frontend skills and emerging technologies while documenting my solo travelling experiences.</p>
             </Container>
         </Box>
     );

@@ -129,7 +129,7 @@ function getPickRegions(continent, regions) {
             <></>
         )}
         {Array.isArray(regions) && regions.map(region => (
-            <LinkTab style={{zIndex: 5}} label={region?.name} href={"/destinations/" + region?.slug} />
+            <LinkTab key={region?.name} style={{zIndex: 5}} label={region?.name} href={"/destinations/" + region?.slug} />
         ))}
     </>
 }
@@ -142,7 +142,7 @@ function getPickCountries(countries) {
         <Tab disabled sx={{textTransform: "uppercase"}} label="Pick a country" />
         <Divider sx={{mx: 1}} orientation="vertical" variant="middle" flexItem/>
         {Array.isArray(countries) && countries.map(country => (
-            <LinkTab style={{zIndex: 5}} label={country?.name} href={"/destinations/" + country?.slug} />
+            <LinkTab key={country?.name} style={{zIndex: 5}} label={country?.name} href={"/destinations/" + country?.slug} />
         ))}
     </>
 }
@@ -155,7 +155,7 @@ function getPickTrips(trips) {
         <Tab disabled sx={{textTransform: "uppercase"}} label="See in trips" />
         <Divider sx={{mx: 1}} orientation="vertical" variant="middle" flexItem/>
         {Array.isArray(trips) && trips.map(trip => (
-            <LinkTab style={{zIndex: 5}} label={trip?.name} href={"/trips/" + trip?.slug} />
+            <LinkTab key={trip?.name} style={{zIndex: 5}} label={trip?.name} href={"/trips/" + trip?.slug} />
         ))}
     </>
 }
