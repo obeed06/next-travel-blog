@@ -46,7 +46,7 @@ export default function Post({post, nestedHeadings, preview}) {
                   .fit('crop')
                   .width(1200)
                   .height(630)
-                  .url()} />
+                  .url()}/>
         <HeaderAndFooter>
             {
                 typeof (post) !== 'undefined' ? (
@@ -94,7 +94,8 @@ export default function Post({post, nestedHeadings, preview}) {
                 ) : (
                     <Box>
                         <Box className={styles.postLanding}>
-                            <Grid sx={{height: "100%"}} container direction="row" justifyContent="center" alignItems="end">
+                            <Grid sx={{height: "100%"}} container direction="row" justifyContent="center"
+                                  alignItems="end">
                                 <Skeleton sx={{mb: 5}} height={80} width={"40%"}/>
                             </Grid>
                         </Box>
@@ -140,25 +141,18 @@ const ChipCategories = ({categories}) => {
         : ""
 }
 
-export async function getStaticProps({ params, preview = false }) {
-    const post = await  getPostAndRelatedPostsForCategory(params.slug, preview)
+export const getServerSideProps = async (pageContext, preview = false) => {
+    const slug = pageContext.query.slug
+
+    if (!slug)
+        return {
+            notFound: true
+        }
+
+    const post = await getPostAndRelatedPostsForCategory(slug, preview)
     const nestedHeadings = typeof (post) !== 'undefined' && post !== null ? getHeadingsFromPostBodyJson(post?.body) : []
 
     return {
-        props: { post, nestedHeadings, preview },
-        revalidate: 1
-    }
-}
-
-export async function getStaticPaths() {
-    const allPosts = await getAllPosts()
-    return {
-        paths:
-            allPosts?.map((post) => ({
-                params: {
-                    slug: post.slug,
-                },
-            })) || [],
-        fallback: true,
+        props: {post: post, nestedHeadings: nestedHeadings, preview: preview},
     }
 }

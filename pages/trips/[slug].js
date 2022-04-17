@@ -12,6 +12,7 @@ import {getTripAndRelatedPosts, getTrips} from "../../lib/tripApi";
 import HeaderAndFooter from "../../components/HeaderAndFooter";
 import Container from "@mui/material/Container";
 import {PortableText} from "@portabletext/react";
+import {getDestinationAndRelatedPosts} from "../../lib/destinationApi";
 
 const useStyles = makeStyles((theme) => ({
     tripLanding: {
@@ -80,23 +81,16 @@ export default function Trip({trip, relatedPosts, preview}) {
     </HeaderAndFooter>
 };
 
-export async function getStaticProps({ params, preview = false }) {
-    const [trip, relatedPosts] = await  getTripAndRelatedPosts(params.slug, preview)
-    return {
-        props: { trip, relatedPosts, preview },
-        revalidate: 1
-    }
-}
+export const getServerSideProps = async (pageContext, preview = false) => {
+    const slug = pageContext.query.slug
 
-export async function getStaticPaths() {
-    const allTrips = await getTrips()
+    if (!slug)
+        return {
+            notFound: true
+        }
+
+    const [trip, relatedPosts] = await  getTripAndRelatedPosts(slug, preview)
     return {
-        paths:
-            allTrips?.map((trip) => ({
-                params: {
-                    slug: trip.slug,
-                },
-            })) || [],
-        fallback: true,
+        props: {trip: trip, relatedPosts: relatedPosts, preview: preview},
     }
 }

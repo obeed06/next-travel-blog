@@ -19,6 +19,8 @@ import {deepOrange} from "@mui/material/colors";
 import Meta from "../../components/Meta";
 import urlBuilder from "@sanity/image-url";
 import {getClient} from "../../lib/sanity";
+import {getPostAndRelatedPostsForCategory} from "../../lib/postApi";
+import {getHeadingsFromPostBodyJson} from "../../lib/postUtils";
 
 export default function Destination({destination, relatedPosts, preview}) {
     const themeProps = useTheme();
@@ -160,23 +162,15 @@ function getPickTrips(trips) {
     </>
 }
 
-export async function getStaticProps({ params, preview = false }) {
-    const [destination, relatedPosts] = await  getDestinationAndRelatedPosts(params.slug, preview)
-    return {
-        props: { destination, relatedPosts, preview },
-        revalidate: 1
-    }
-}
+export const getServerSideProps = async (pageContext, preview = false) => {
+    const slug = pageContext.query.slug
 
-export async function getStaticPaths() {
-    const allDestinations = await getDestinations(false)
+    if (!slug)
+        return {
+            notFound: true
+        }
+    const [destination, relatedPosts] = await  getDestinationAndRelatedPosts(slug, preview)
     return {
-        paths:
-            allDestinations?.map((destination) => ({
-                params: {
-                    slug: destination.slug,
-                },
-            })) || [],
-        fallback: true,
+        props: {destination: destination, relatedPosts: relatedPosts, preview: preview},
     }
 }
