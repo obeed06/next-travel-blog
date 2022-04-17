@@ -16,7 +16,7 @@ import Stack from "@mui/material/Stack";
 import ColorModeContext from "../src/ColorModeContext";
 import {useTheme} from "@mui/styles";
 
-const Footer = (props: any) => {
+const Footer = () => {
     const theme = useTheme();
     const { darkMode, setDarkMode } = useContext(ColorModeContext);
     return (
