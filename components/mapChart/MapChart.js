@@ -1,10 +1,11 @@
-import './MapChart.css';
-import React, {memo} from "react";
+import styles from './MapChart.module.css';
+import React, {memo, useContext} from "react";
 import {
     ComposableMap,
     Geographies,
     Geography
 } from "react-simple-maps";
+import ColorModeContext from "../../src/ColorModeContext";
 
 const excluded = ["Antarctica"]
 
@@ -12,12 +13,14 @@ const geoUrl =
     "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
 
 const MapChart = ({visitedGeos}) => {
-    let defaultSVGColorFill = localStorage.getItem('colorMode') === 'dark' ? "#23252b" : "#efefef" ;
+    const { darkMode } = useContext(ColorModeContext);
+
+    let defaultSVGColorFill = darkMode ? "#23252b" : "#efefef" ;
 
     return (
         visitedGeos ?
             (
-                    <ComposableMap className="mapChart" data-tip="" projection="geoEqualEarth"
+                    <ComposableMap className={styles.mapChart} data-tip="" projection="geoEqualEarth"
                                    projectionConfig={{scale: 180}}>
                         <Geographies geography={geoUrl}>
                             {({geographies}) =>
