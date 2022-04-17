@@ -13,11 +13,12 @@ import {lightTheme, darkTheme} from '../src/theme';
 import createEmotionCache from "../src/createEmotionCache";
 import ColorModeContext from "../src/ColorModeContext";
 import {CacheProvider} from "@emotion/react";
+import {PortableTextComponentsProvider} from "@portabletext/react";
+import DefaultBlockContent from "../components/DefaultBlockContent";
 
 config.autoAddCss = false
 
 library.add(fab, faCheckSquare, faCoffee)
-
 
 
 // Client-side cache, shared for the whole session of the user in the browser.
@@ -49,9 +50,11 @@ function MyApp(props) {
             <ColorModeContext.Provider value={{darkMode, setDarkMode: _setDarkMode}}>
                 <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
                     <CssBaseline/>
-                    <ParallaxProvider>
-                        <Component {...pageProps} />
-                    </ParallaxProvider>
+                    <PortableTextComponentsProvider components={DefaultBlockContent}>
+                        <ParallaxProvider>
+                            <Component {...pageProps} />
+                        </ParallaxProvider>
+                    </PortableTextComponentsProvider>
                 </ThemeProvider>
             </ColorModeContext.Provider>
         </CacheProvider>

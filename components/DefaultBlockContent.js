@@ -1,8 +1,8 @@
 import React from 'react';
-import {hyphenate} from "../pages/api/postUtils";
+import {hyphenate} from "../lib/postUtils";
 import {getImageDimensions} from "@sanity/asset-utils";
 import urlBuilder from "@sanity/image-url";
-import {getClient} from "../pages/api/sanity";
+import {getClient} from "../lib/sanity";
 import Link from "../src/Link";
 
 const DefaultBlockContent = {
