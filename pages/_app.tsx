@@ -15,11 +15,14 @@ import ColorModeContext from "../src/ColorModeContext";
 import {CacheProvider} from "@emotion/react";
 import {PortableTextComponentsProvider} from "@portabletext/react";
 import DefaultBlockContent from "../components/DefaultBlockContent";
+import {Theme} from "@mui/material";
 
 config.autoAddCss = false
-
 library.add(fab, faCheckSquare, faCoffee)
-
+declare module '@mui/styles/defaultTheme' {
+    // eslint-disable-next-line @typescript-eslint/no-empty-interface (remove this line if you don't have the rule enabled)
+    interface DefaultTheme extends Theme {}
+}
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
