@@ -11,7 +11,7 @@ export default function MobilePostCard({post}) {
     Moment.locale('en')
 
     return (
-        <Link href={"/post/" + post.slug} key={post.slug} underline="none" style={{width: "100%"}}>
+        <Link href={"/posts/" + post.slug} key={post.slug} underline="none" style={{width: "100%"}}>
             <Paper elevation={0} square className="mobilePostCard"
                    style={{backgroundImage: "linear-gradient(rgba(0, 0, 0, 0) 65%, black), url(" + post.mainImage.asset.url + ")"}}>
                 <Stack direction="column" justifyContent="flex-end" alignItems="center" spacing={1} style={{height: "80%"}}>

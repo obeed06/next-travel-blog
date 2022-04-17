@@ -12,7 +12,7 @@ import PostTags from "./PostTags";
 export default function HeroPostCard({post}) {
     Moment.locale('en')
     return (
-        <Link href={"/post/" + post.slug} key={post.slug} underline="none" style={{width: "100%"}}>
+        <Link href={"/posts/" + post.slug} key={post.slug} underline="none" style={{width: "100%"}}>
             <Paper elevation={3} className="mobilePostCard"
                    style={{
                        height: "550px",
