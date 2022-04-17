@@ -1,7 +1,5 @@
-.postLanding {
-    height: calc(var(--vh,1vh) * 100 + -70px)!important;
-    min-height: 500px;
-    max-height: 1000px;
+.tripLanding {
+    height: 66vh;
     background-color: darkgrey;
     background-repeat: no-repeat;
     background-size: cover;
@@ -10,21 +8,7 @@
     overflow: hidden;
 }
 
-.postLanding h1 {
-    font-family: var(--font-signature);
-    font-weight: lighter;
-    color: white;
-    text-align: center;
-    letter-spacing: 0.1ch;
-}
-
-@media screen and (max-width: 992px) {
-    .postLanding {
-        max-height: 850px;
-    }
-}
-
-.postLanding:after {
+.tripLanding:after {
     mask: url('/assets/curve.svg');
     -webkit-mask-image: url('/assets/curve.svg');
     position: absolute;
@@ -38,4 +22,3 @@
     backface-visibility: hidden;
     height: 50px;
 }
-

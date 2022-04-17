@@ -38,7 +38,7 @@ export default function TripCard({slugPrefix, item, checked, timeout = 1}) {
                   onMouseOver={() => setState({raised: true, shadow: 3})}
                   onMouseOut={() => setState({raised: false, shadow: 1})}
                   raised={state.raised} zdepth={state.shadow}>
-                <CardActionArea href={slugPrefix+item.slug.current} key={item.slug.current}>
+                <CardActionArea href={slugPrefix+item.slug} key={item.slug}>
                     <CardMedia
                         className={classes.media}
                         image={item.thumbnail.asset.url}

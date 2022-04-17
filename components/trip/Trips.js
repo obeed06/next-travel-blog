@@ -39,7 +39,7 @@ const Trips = ({trips}) => {
             </Box>
             <Stack direction="row" spacing={2} className="cardXScroll" sx={{pt:1, px: 5, position: "relative", zIndex: "3"}}>
                 {trips && trips.map((trip, i) => {
-                    return <TripCard key={i} slugPrefix="/trip/" item={trip} checked={checked}/>
+                    return <TripCard key={i} slugPrefix="/trips/" item={trip} checked={checked}/>
                 })}
             </Stack>
             <Container maxWidth='lg' sx={{pb: 5}}>

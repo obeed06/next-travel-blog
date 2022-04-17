@@ -1,23 +1,23 @@
-.d-card {
+.dCard {
     background-color: darkgrey;
     background-size: 250%;
     background-position: center center;
     background-repeat: no-repeat;
 }
 
-.d-card-title {
+.dCardTitle {
     font-family: var(--font-signature);
     color: #fff;
     font-size: 2.5rem;
     text-align: center;
 }
 
-.d-icon {
+.dIcon {
     padding: 50px 0;
     position: relative;
 }
 
-.d-icon-bg {
+.dIconBg {
     opacity: .3;
     position: absolute;
     top: 0;
