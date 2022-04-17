@@ -9,9 +9,9 @@ export default function MobileDestinationCard({post: destination}) {
             <Paper elevation={0} square className="mobilePostCard"
                    style={{backgroundImage: "linear-gradient(rgba(0, 0, 0, 0) 65%, black), url(" + destination?.bgImage?.asset?.url + ")"}}>
                 <Stack direction="column" justifyContent="flex-end" alignItems="center" spacing={1} style={{height: "80%"}}>
-                    <div className="d-icon">
-                        <div className="d-icon-bg" style={{backgroundImage: "url("+destination?.icon?.asset?.url+")"}}></div>
-                        <div className="d-card-title">{destination.name}</div>
+                    <div className="dIcon">
+                        <div className="dIconBg" style={{backgroundImage: "url("+destination?.icon?.asset?.url+")"}}></div>
+                        <div className="dCardTitle">{destination.name}</div>
                     </div>
 
                 </Stack>

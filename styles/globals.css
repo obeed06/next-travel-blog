@@ -196,3 +196,10 @@ h2, h3 {
   background-repeat: no-repeat;
   filter: invert(100);
 }
+
+.dCardTitle {
+  font-family: var(--font-signature);
+  color: #fff;
+  font-size: 2.5rem;
+  text-align: center;
+}

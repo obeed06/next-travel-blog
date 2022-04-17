@@ -9,7 +9,7 @@ export default function DestinationCard({destination}) {
                 <CardContent sx={{height: 300}}>
                     <div className="dIcon">
                         <div className="dIconBg" style={{backgroundImage: "url("+destination?.icon?.asset?.url+")"}}></div>
-                        <div className={styles.dCardTitle}>{destination?.name}</div>
+                        <div className="dCardTitle">{destination?.name}</div>
                     </div>
                 </CardContent>
             </CardActionArea>
