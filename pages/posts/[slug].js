@@ -109,7 +109,7 @@ const DestinationBreadcrumbs = ({destinations}) => {
             destinations && Array.isArray(destinations) ?
                 (
                     destinations.map((d, i) => <Button color="primary" size="small" key={i + d.name}>
-                        <Link underline="none" href={"/destination/" + d?.slug.current}>{d.name}</Link>
+                        <Link underline="none" href={"/destinations/" + d?.slug}>{d.name}</Link>
                     </Button>)
                 ) : ""
         }

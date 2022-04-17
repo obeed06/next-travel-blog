@@ -31,7 +31,7 @@ export default function PostTags({post, tagSize = "x-small"}) {
             )}
             {destinationNames && destinationNames.map((destinationName, i) =>
                 (destinationName ? (
-                    <span key={"tag-destination-" + destinationName.title + i} style={{fontSize: tagSize}}>
+                    <span key={"tag-destinations-" + destinationName.title + i} style={{fontSize: tagSize}}>
                                 {destinationName}
                             </span>
                 ) : (

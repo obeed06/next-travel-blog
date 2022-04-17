@@ -40,7 +40,7 @@ const DestinationGrid = ({destinations}) => {
                   sx={{position: "relative"}}>
                 {destinations &&
                 destinations.map((post, i) => (
-                    <Grid item key={"mobile-destination-" + i}><MobileDestinationCard post={post}/></Grid>
+                    <Grid item key={"mobile-destinations-" + i}><MobileDestinationCard post={post}/></Grid>
                 ))}
             </Grid>
         )

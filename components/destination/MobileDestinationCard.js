@@ -5,7 +5,7 @@ import Link from "../../src/Link";
 
 export default function MobileDestinationCard({post: destination}) {
     return (
-        <Link href={"/destination/" + destination.slug.current} key={destination.slug.current} underline="none" style={{width: "100%"}}>
+        <Link href={"/destinations/" + destination.slug} key={destination.slug} underline="none" style={{width: "100%"}}>
             <Paper elevation={0} square className="mobilePostCard"
                    style={{backgroundImage: "linear-gradient(rgba(0, 0, 0, 0) 65%, black), url(" + destination?.bgImage?.asset?.url + ")"}}>
                 <Stack direction="column" justifyContent="flex-end" alignItems="center" spacing={1} style={{height: "80%"}}>
