@@ -5,6 +5,7 @@ import {Card, CardMedia, CardContent, CardActionArea} from '@mui/material';
 import Divider from "@mui/material/Divider";
 import Moment from "moment";
 import PostTags from "./PostTags";
+import Link from "../../src/Link";
 
 const useStyles = makeStyles({
     root: {
@@ -37,31 +38,33 @@ export default function PostCard({post}) {
         shadow: 1,
     });
     return (
-        <Card className={classes.root} classes={{root: state.raised ? classes.cardHovered : ""}}
-              onMouseOver={() => setState({raised: true, shadow: 3})}
-              onMouseOut={() => setState({raised: false, shadow: 1})}
-              raised={state.raised} zdepth={state.shadow}>
-            <CardActionArea href={"/posts/" + post.slug} key={post.slug}>
-                <CardMedia
-                    className={classes.media}
-                    image={post.mainImage.asset.url}
-                    alt={post.mainImage.alt}
-                />
-                <CardContent>
-                    <PostTags post={post}/>
-                    <Typography
-                        gutterBottom
-                        variant="h5"
-                        component="h5"
-                        className="cardHeader"
-                    >
-                        {post.title}
-                    </Typography>
-                    <Divider style={{borderColor: "rgba(255, 255, 255, 0.15)"}}/>
-                    <span
-                        className="postCardAuthor">By {post.author.name} on {Moment(post.date).format('DD MMMM YYYY')}</span>
-                </CardContent>
-            </CardActionArea>
-        </Card>
+        <Link href={"/posts/" + post.slug} underline="none">
+            <Card className={classes.root} classes={{root: state.raised ? classes.cardHovered : ""}}
+                  onMouseOver={() => setState({raised: true, shadow: 3})}
+                  onMouseOut={() => setState({raised: false, shadow: 1})}
+                  raised={state.raised} zdepth={state.shadow}>
+                <CardActionArea key={post.slug}>
+                    <CardMedia
+                        className={classes.media}
+                        image={post.mainImage.asset.url}
+                        alt={post.mainImage.alt}
+                    />
+                    <CardContent>
+                        <PostTags post={post}/>
+                        <Typography
+                            gutterBottom
+                            variant="h5"
+                            component="h5"
+                            className="cardHeader"
+                        >
+                            {post.title}
+                        </Typography>
+                        <Divider sx={{my: 1}} style={{borderColor: "rgba(255, 255, 255, 0.15)"}}/>
+                        <span
+                            className="postCardAuthor">By {post.author.name} on {Moment(post.date).format('DD MMMM YYYY')}</span>
+                    </CardContent>
+                </CardActionArea>
+            </Card>
+        </Link>
     );
 }

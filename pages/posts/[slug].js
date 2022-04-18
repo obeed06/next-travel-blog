@@ -11,7 +11,6 @@ import Container from "@mui/material/Container";
 import {makeStyles} from "@mui/styles";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import Link from "@mui/material/Link";
 import Chip from "@mui/material/Chip";
 import {PortableText} from "@portabletext/react";
 import {getPostAndRelatedPostsForCategory} from "../../lib/postApi";
@@ -23,6 +22,7 @@ import Button from "@mui/material/Button";
 import Meta from "../../components/Meta";
 import {getClient} from "../../lib/sanity";
 import urlBuilder from "@sanity/image-url";
+import Link from "../../src/Link";
 
 const useStyles = makeStyles((theme) => ({
     postLanding: {
@@ -53,7 +53,6 @@ export default function Post({post, nestedHeadings, preview}) {
             {
                 typeof (post) !== 'undefined' ? (
                     <Box>
-
                         <Box className={`${classes.postLanding} ${styles.postLanding}`}
                              style={{backgroundImage: "linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2)), url(" + post?.mainImage?.asset?.url + ")"}}>
                             <Grid sx={{height: "100%"}} container direction="column" justifyContent="center"
@@ -111,13 +110,13 @@ export default function Post({post, nestedHeadings, preview}) {
 const DestinationBreadcrumbs = ({destinations}) => {
     return <Breadcrumbs separator={<NavigateNextIcon fontSize="small"/>}
                         aria-label="breadcrumb">
-        <Button color="primary" size="small"><Link href="/" underline="none">Home</Link></Button>
+        <Link href={"/"} underline="none"><Button color="primary" size="small">Home</Button></Link>
         {
             destinations && Array.isArray(destinations) ?
                 (
-                    destinations.map((d, i) => <Button color="primary" size="small" key={i + d.name}>
-                        <Link underline="none" href={"/destinations/" + d?.slug}>{d.name}</Link>
-                    </Button>)
+                    destinations.map((d, i) => <Link key={i + d.name} underline="none" href={"/destinations/" + d?.slug}>
+                        <Button color="primary" size="small" >{d.name}</Button>
+                    </Link>)
                 ) : ""
         }
     </Breadcrumbs>

@@ -7,7 +7,6 @@ import IconButton from "@mui/material/IconButton";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Chip from "@mui/material/Chip";
-import Link from "@mui/material/Link";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Avatar from "@mui/material/Avatar";
@@ -15,6 +14,7 @@ import Tooltip from "@mui/material/Tooltip";
 import Stack from "@mui/material/Stack";
 import ColorModeContext from "../src/ColorModeContext";
 import {useTheme} from "@mui/styles";
+import Link from "../src/Link";
 
 const Footer = () => {
     const theme = useTheme();

@@ -19,11 +19,12 @@ import {deepOrange} from "@mui/material/colors";
 import Meta from "../../components/Meta";
 import urlBuilder from "@sanity/image-url";
 import {getClient} from "../../lib/sanity";
+import Link from "../../src/Link";
 
 export default function Destination({destination, relatedPosts, preview}) {
     const themeProps = useTheme();
     return <>
-        <Meta title={"Explore " + destination.name + " | Where's Obee Blog"}
+        <Meta title={"Explore " + destination?.name + " | Where's Obee Blog"}
               {...(destination?.summary ? {description: destination.summary} : {})}
               {...(destination?.bgImage ? {
                   image: (urlBuilder(getClient(false))
@@ -114,7 +115,7 @@ export default function Destination({destination, relatedPosts, preview}) {
 function LinkTab(props) {
     return (
         <Tab
-            component="a"
+            component={Link}
             sx={{
                 borderBottom: "2px solid transparent",
                 ":hover": {
@@ -133,7 +134,7 @@ function getPickRegions(continent, regions) {
         <Tab disabled sx={{textTransform: "uppercase"}} label="Pick a region"/>
         <Divider sx={{mx: 1}} orientation="vertical" variant="middle" flexItem/>
         {(continent) !== 'undefined' && continent !== null ? (
-            <LinkTab style={{zIndex: 5}} label={continent?.name} href={"/destinations/" + continent?.slug}/>
+            <LinkTab style={{zIndex: 5}} label={continent?.name} href={"/destinations/" + continent?.slug} />
         ) : (
             <></>
         )}
