@@ -1,8 +1,8 @@
 import * as React from 'react';
 import Document, {Html, Head, Main, NextScript} from 'next/document';
 import createEmotionServer from '@emotion/server/create-instance';
-import {lightTheme, darkTheme} from '../src/theme';
 import createEmotionCache from '../src/createEmotionCache';
+import {lightTheme, darkTheme} from '../src/theme';
 
 export default class MyDocument extends Document {
     render() {
@@ -12,16 +12,12 @@ export default class MyDocument extends Document {
                     {/* PWA primary color */}
                     <meta name="theme-color" content={darkTheme.palette.primary.main}/>
                     <link rel="shortcut icon" href="/static/favicon.ico"/>
-                    <link
-                        rel="stylesheet"
-                        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-                    />
-                    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-                    <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true"/>
-                    <link
-                        href="https://fonts.googleapis.com/css2?family=Arvo:wght@700&family=Bungee+Outline&family=Nunito:wght@900&display=swap"
-                        rel="stylesheet"/>
-                    <link href="https://fonts.cdnfonts.com/css/molot" rel="stylesheet"/>
+                    {/*<link rel="preconnect" href="https://fonts.googleapis.com"/>*/}
+                    {/*<link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true"/>*/}
+                    {/*<link*/}
+                    {/*    href="https://fonts.googleapis.com/css2?family=Bungee&family=Bungee+Outline&family=Nunito+Sans:wght@900&family=Roboto:wght@100;300&family=Teko:wght@700&display=swap"*/}
+                    {/*    rel="stylesheet"/>*/}
+                    {/*<link href="https://fonts.cdnfonts.com/css/molot" rel="stylesheet"/>*/}
                     {/* Inject MUI styles first to match with the prepend: true configuration. */}
                     {/*{this.props.emotionStyleTags}*/}
                 </Head>

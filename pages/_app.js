@@ -15,6 +15,7 @@ import ColorModeContext from "../src/ColorModeContext";
 import {CacheProvider} from "@emotion/react";
 import {PortableTextComponentsProvider} from "@portabletext/react";
 import DefaultBlockContent from "../components/DefaultBlockContent";
+import Head from "next/head";
 
 config.autoAddCss = false
 library.add(fab, faCheckSquare, faCoffee)
@@ -44,18 +45,27 @@ function MyApp(props) {
         setDarkMode(newmode);
     };
     return (
-        <CacheProvider value={emotionCache}>
-            <ColorModeContext.Provider value={{darkMode, setDarkMode: _setDarkMode}}>
-                <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
-                    <CssBaseline/>
-                    <PortableTextComponentsProvider components={DefaultBlockContent}>
-                        <ParallaxProvider>
-                            <Component {...pageProps} />
-                        </ParallaxProvider>
-                    </PortableTextComponentsProvider>
-                </ThemeProvider>
-            </ColorModeContext.Provider>
-        </CacheProvider>
+        <>
+            <Head>
+                <style>
+                    @import
+                    url('https://fonts.googleapis.com/css2?family=Bungee&family=Bungee+Outline&family=Nunito+Sans:wght@900&family=Roboto:wght@100;300&family=Teko:wght@700&display=swap');
+                </style>
+            </Head>
+            <CacheProvider value={emotionCache}>
+                <ColorModeContext.Provider value={{darkMode, setDarkMode: _setDarkMode}}>
+                    <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
+                        <CssBaseline/>
+                        <PortableTextComponentsProvider components={DefaultBlockContent}>
+                            <ParallaxProvider>
+                                <Component {...pageProps} />
+                            </ParallaxProvider>
+                        </PortableTextComponentsProvider>
+                    </ThemeProvider>
+                </ColorModeContext.Provider>
+            </CacheProvider>
+        </>
+
     );
 }
 
