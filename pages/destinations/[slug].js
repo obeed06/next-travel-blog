@@ -19,38 +19,41 @@ import {deepOrange} from "@mui/material/colors";
 import Meta from "../../components/Meta";
 import urlBuilder from "@sanity/image-url";
 import {getClient} from "../../lib/sanity";
-import {getPostAndRelatedPostsForCategory} from "../../lib/postApi";
-import {getHeadingsFromPostBodyJson} from "../../lib/postUtils";
 
 export default function Destination({destination, relatedPosts, preview}) {
     const themeProps = useTheme();
     return <>
-        <Meta title={"Explore " + destination.name + " | Where's Obee Blog"} description={destination.summary}
-            {...(destination?.bgImage ? {image: (urlBuilder(getClient(false))
-                  .image(destination?.bgImage)
-                  .fit('crop')
-                  .width(1200)
-                  .height(630)
-                  .url()) } : {} ) } />
+        <Meta title={"Explore " + destination.name + " | Where's Obee Blog"}
+              {...(destination?.summary ? {description: destination.summary} : {})}
+              {...(destination?.bgImage ? {
+                  image: (urlBuilder(getClient(false))
+                      .image(destination?.bgImage)
+                      .fit('crop')
+                      .width(1200)
+                      .height(630)
+                      .url())
+              } : {})} />
         <HeaderAndFooter>
             {
                 typeof (destination) !== 'undefined' ? (
                     <Box>
                         <Box className={styles.destinationLanding}
                              {...(destination?.bgImage ?
-                                 {style: ({
-                                     backgroundImage: "linear-gradient(to bottom, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0.5), " + themeProps.palette.background.default + "), url(" + urlBuilder(getClient(false))
-                                         .image(destination?.bgImage)
-                                         .blur(30)
-                                         .url() + ")"
-                                 })} : {}
-                                 )}>
+                                     {
+                                         style: ({
+                                             backgroundImage: "linear-gradient(to bottom, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0.5), " + themeProps.palette.background.default + "), url(" + urlBuilder(getClient(false))
+                                                 .image(destination?.bgImage)
+                                                 .blur(30)
+                                                 .url() + ")"
+                                         })
+                                     } : {}
+                             )}>
                             <Grid sx={{height: "100%"}} container direction="column" justifyContent="center"
                                   alignItems="center">
                                 <Grid item className="dIcon" style={{width: '60%', height: '60%'}}>
                                     <div className="dIconBg"
                                          style={{backgroundImage: "url(" + destination?.icon?.asset?.url + ")"}}></div>
-                                    <Typography vairant="h1" component="h1"  style={{
+                                    <Typography vairant="h1" component="h1" style={{
                                         position: 'absolute',
                                         top: '50%',
                                         left: '50%',
@@ -127,15 +130,16 @@ function getPickRegions(continent, regions) {
     if (!continent && (!Array.isArray(regions) || regions.length === 0))
         return;
     return <>
-        <Tab disabled sx={{textTransform: "uppercase"}} label="Pick a region" />
+        <Tab disabled sx={{textTransform: "uppercase"}} label="Pick a region"/>
         <Divider sx={{mx: 1}} orientation="vertical" variant="middle" flexItem/>
         {(continent) !== 'undefined' && continent !== null ? (
-            <LinkTab style={{zIndex: 5}} label={continent?.name} href={"/destinations/" + continent?.slug} />
+            <LinkTab style={{zIndex: 5}} label={continent?.name} href={"/destinations/" + continent?.slug}/>
         ) : (
             <></>
         )}
         {Array.isArray(regions) && regions.map(region => (
-            <LinkTab key={region?.name} style={{zIndex: 5}} label={region?.name} href={"/destinations/" + region?.slug} />
+            <LinkTab key={region?.name} style={{zIndex: 5}} label={region?.name}
+                     href={"/destinations/" + region?.slug}/>
         ))}
     </>
 }
@@ -145,10 +149,11 @@ function getPickCountries(countries) {
         return;
 
     return <>
-        <Tab disabled sx={{textTransform: "uppercase"}} label="Pick a country" />
+        <Tab disabled sx={{textTransform: "uppercase"}} label="Pick a country"/>
         <Divider sx={{mx: 1}} orientation="vertical" variant="middle" flexItem/>
         {Array.isArray(countries) && countries.map(country => (
-            <LinkTab key={country?.name} style={{zIndex: 5}} label={country?.name} href={"/destinations/" + country?.slug} />
+            <LinkTab key={country?.name} style={{zIndex: 5}} label={country?.name}
+                     href={"/destinations/" + country?.slug}/>
         ))}
     </>
 }
@@ -158,10 +163,10 @@ function getPickTrips(trips) {
         return;
 
     return <>
-        <Tab disabled sx={{textTransform: "uppercase"}} label="See in trips" />
+        <Tab disabled sx={{textTransform: "uppercase"}} label="See in trips"/>
         <Divider sx={{mx: 1}} orientation="vertical" variant="middle" flexItem/>
         {Array.isArray(trips) && trips.map(trip => (
-            <LinkTab key={trip?.name} style={{zIndex: 5}} label={trip?.name} href={"/trips/" + trip?.slug} />
+            <LinkTab key={trip?.name} style={{zIndex: 5}} label={trip?.name} href={"/trips/" + trip?.slug}/>
         ))}
     </>
 }
@@ -173,7 +178,7 @@ export const getServerSideProps = async (pageContext, preview = false) => {
         return {
             notFound: true
         }
-    const [destination, relatedPosts] = await  getDestinationAndRelatedPosts(slug, preview)
+    const [destination, relatedPosts] = await getDestinationAndRelatedPosts(slug, preview)
     return {
         props: {destination: destination, relatedPosts: relatedPosts, preview: preview},
     }

@@ -14,7 +14,7 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import Link from "@mui/material/Link";
 import Chip from "@mui/material/Chip";
 import {PortableText} from "@portabletext/react";
-import {getAllPosts, getPostAndRelatedPostsForCategory} from "../../lib/postApi";
+import {getPostAndRelatedPostsForCategory} from "../../lib/postApi";
 import {getHeadingsFromPostBodyJson} from "../../lib/postUtils";
 import HeaderAndFooter from "../../components/HeaderAndFooter";
 import TableOfContentsDrawer from "../../components/post/toc/TableOfContentsDrawer";
@@ -35,18 +35,20 @@ const useStyles = makeStyles((theme) => ({
 export default function Post({post, nestedHeadings, preview}) {
     const classes = useStyles();
     // let location = useLocation();
-
     const postBodyTopRef = useRef(null)
     const postBodyBottomRef = useRef(null)
 
     return <>
-        <Meta type="article" title={post.title + " | Where's Obee Blog"} description={post.summary}
-              image={urlBuilder(getClient(false))
-                  .image(post?.mainImage)
-                  .fit('crop')
-                  .width(1200)
-                  .height(630)
-                  .url()}/>
+        <Meta type="article" title={post.title + " | Where's Obee Blog"}
+              {...(post?.summary ? {description: post.summary} : {})}
+              {...(post?.mainImage ? {
+                  image: (urlBuilder(getClient(false))
+                      .image(post?.mainImage)
+                      .fit('crop')
+                      .width(1200)
+                      .height(630)
+                      .url())
+              } : {})} />
         <HeaderAndFooter>
             {
                 typeof (post) !== 'undefined' ? (
@@ -104,8 +106,6 @@ export default function Post({post, nestedHeadings, preview}) {
             }
         </HeaderAndFooter>
     </>
-
-
 };
 
 const DestinationBreadcrumbs = ({destinations}) => {
