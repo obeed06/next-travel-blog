@@ -39,7 +39,7 @@ export default function Post({post, nestedHeadings, preview}) {
     const postBodyBottomRef = useRef(null)
 
     return <>
-        <Meta type="article" title={post.title + " | Where's Obee Blog"}
+        <Meta type="article" title={post?.title + " | Where's Obee Blog"}
               {...(post?.summary ? {description: post.summary} : {})}
               {...(post?.mainImage ? {
                   image: (urlBuilder(getClient(false))
@@ -65,11 +65,11 @@ export default function Post({post, nestedHeadings, preview}) {
                                         variant="h3"
                                         component="h1"
                                     >
-                                        {post.title}
+                                        {post?.title}
                                     </Typography>
                                     <Divider style={{borderColor: "rgba(255, 255, 255, 0.15)", width: "75%"}}/>
                                     <span
-                                        className={styles.postCardAuthor}>By {post.author.name} on {Moment(post.publishedAt).format('DD MMMM YYYY')}</span>
+                                        className={styles.postCardAuthor}>By {post?.author?.name} on {Moment(post?.publishedAt).format('DD MMMM YYYY')}</span>
                                 </Stack>
                             </Grid>
                         </Box>

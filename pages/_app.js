@@ -16,6 +16,7 @@ import {CacheProvider} from "@emotion/react";
 import {PortableTextComponentsProvider} from "@portabletext/react";
 import DefaultBlockContent from "../components/DefaultBlockContent";
 import Head from "next/head";
+import PropTypes from 'prop-types';
 
 config.autoAddCss = false
 library.add(fab, faCheckSquare, faCoffee)
@@ -23,7 +24,7 @@ library.add(fab, faCheckSquare, faCoffee)
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
 
-function MyApp(props) {
+export default function MyApp(props) {
     const {Component, emotionCache = clientSideEmotionCache, pageProps} = props;
 
     // Set dark mode based on media query
@@ -45,28 +46,30 @@ function MyApp(props) {
         setDarkMode(newmode);
     };
     return (
-        <>
+        <CacheProvider value={emotionCache}>
             <Head>
+                <meta name="viewport" content="initial-scale=1, width=device-width" />
                 <style>
                     @import
-                    url('https://fonts.googleapis.com/css2?family=Bungee&family=Bungee+Outline&family=Nunito+Sans:wght@900&family=Roboto:wght@100;300&family=Teko:wght@700&display=swap');
+                    url(&#39;https://fonts.googleapis.com/css2?family=Bungee&family=Bungee+Outline&family=Nunito+Sans:wght@900&family=Roboto:wght@100;300&family=Teko:wght@700&display=swap&#39;);
                 </style>
             </Head>
-            <CacheProvider value={emotionCache}>
-                <ColorModeContext.Provider value={{darkMode, setDarkMode: _setDarkMode}}>
-                    <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
-                        <CssBaseline/>
-                        <PortableTextComponentsProvider components={DefaultBlockContent}>
-                            <ParallaxProvider>
-                                <Component {...pageProps} />
-                            </ParallaxProvider>
-                        </PortableTextComponentsProvider>
-                    </ThemeProvider>
-                </ColorModeContext.Provider>
-            </CacheProvider>
-        </>
-
+            <ColorModeContext.Provider value={{darkMode, setDarkMode: _setDarkMode}}>
+                <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
+                    <CssBaseline/>
+                    <PortableTextComponentsProvider components={DefaultBlockContent}>
+                        <ParallaxProvider>
+                            <Component {...pageProps} />
+                        </ParallaxProvider>
+                    </PortableTextComponentsProvider>
+                </ThemeProvider>
+            </ColorModeContext.Provider>
+        </CacheProvider>
     );
 }
 
-export default MyApp
+MyApp.propTypes = {
+    Component: PropTypes.elementType.isRequired,
+    emotionCache: PropTypes.object,
+    pageProps: PropTypes.object.isRequired,
+};

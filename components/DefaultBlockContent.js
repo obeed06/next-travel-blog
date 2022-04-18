@@ -4,6 +4,8 @@ import {getImageDimensions} from "@sanity/asset-utils";
 import urlBuilder from "@sanity/image-url";
 import {getClient} from "../lib/sanity";
 import Link from "../src/Link";
+import {useNextSanityImage} from "next-sanity-image";
+import Img from "next/image";
 
 const DefaultBlockContent = {
     block: {
@@ -34,28 +36,27 @@ const DefaultBlockContent = {
     },
     types: {
         figure: props => {
-            const {width, height} = getImageDimensions(props.value)
-            return (
-                <img
-                    src={urlBuilder(getClient(false))
-                        .image(props.value)
-                        .fit('max')
-                        .auto('format')
-                        .url()}
-                    alt={props.value.alt || ' '}
-                    loading="lazy"
-                    style={{
-                        // Display alongside text if image appears inside a block text span
-                        display: props.isInline ? 'inline-block' : 'block',
-                        width: "100%",
-                        // Avoid jumping around with aspect-ratio CSS property
-                        aspectRatio: width / height,
-                    }}
-                />
-            )
+            return Figure(props)
         },
 
     }
+};
+
+const Figure = props => {
+    const imageProps = useNextSanityImage(
+        getClient(false),
+        props.value,
+        {imageBuilder: blockContentImageBuilder}
+    );
+    return <Img {...imageProps} layout="responsive"
+                sizes="(max-width: 800px) 100vw, 800px" alt={props.value.alt || ' '}/>
+}
+
+const blockContentImageBuilder = (imageUrlBuilder, options) => {
+    return imageUrlBuilder
+        .width(options.width || Math.min(options.originalImageDimensions.width, 800))
+        .fit('max')
+        .auto('format')
 };
 
 export default DefaultBlockContent
