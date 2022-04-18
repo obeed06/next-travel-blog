@@ -73,6 +73,28 @@ export default function MyApp(props) {
                     <CssBaseline/>
                     <PortableTextComponentsProvider components={DefaultBlockContent}>
                         <ParallaxProvider>
+                            <script async
+                                    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5359866899339122"
+                                    crossOrigin="anonymous"></script>
+                            {/* Global Site Tag (gtag.js) - Google Analytics */}
+                            <Script
+                                strategy="afterInteractive"
+                                src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`}
+                            />
+                            <Script
+                                id="gtag-init"
+                                strategy="afterInteractive"
+                                dangerouslySetInnerHTML={{
+                                    __html: `
+                                    window.dataLayer = window.dataLayer || [];
+                                    function gtag(){dataLayer.push(arguments);}
+                                    gtag('js', new Date());
+                                    gtag('config', '${gtag.GA_TRACKING_ID}', {
+                                      page_path: window.location.pathname,
+                                    });
+                                  `,
+                                }}
+                            />
                             <Component {...pageProps} />
                         </ParallaxProvider>
                     </PortableTextComponentsProvider>
