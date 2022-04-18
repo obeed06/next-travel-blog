@@ -17,6 +17,9 @@ import {PortableTextComponentsProvider} from "@portabletext/react";
 import DefaultBlockContent from "../components/DefaultBlockContent";
 import Head from "next/head";
 import PropTypes from 'prop-types';
+import * as gtag from '../lib/gtag'
+import {useRouter} from "next/router";
+import Script from "next/script";
 
 config.autoAddCss = false
 library.add(fab, faCheckSquare, faCoffee)
@@ -26,7 +29,18 @@ const clientSideEmotionCache = createEmotionCache();
 
 export default function MyApp(props) {
     const {Component, emotionCache = clientSideEmotionCache, pageProps} = props;
-
+    const router = useRouter()
+    useEffect(() => {
+        const handleRouteChange = (url) => {
+            gtag.pageview(url)
+        }
+        router.events.on('routeChangeComplete', handleRouteChange)
+        router.events.on('hashChangeComplete', handleRouteChange)
+        return () => {
+            router.events.off('routeChangeComplete', handleRouteChange)
+            router.events.off('hashChangeComplete', handleRouteChange)
+        }
+    }, [router.events])
     // Set dark mode based on media query
     const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
     const [darkMode, setDarkMode] = useState(prefersDarkMode);
@@ -48,7 +62,7 @@ export default function MyApp(props) {
     return (
         <CacheProvider value={emotionCache}>
             <Head>
-                <meta name="viewport" content="initial-scale=1, width=device-width" />
+                <meta name="viewport" content="initial-scale=1, width=device-width"/>
                 <style>
                     @import
                     url(&#39;https://fonts.googleapis.com/css2?family=Bungee&family=Bungee+Outline&family=Nunito+Sans:wght@900&family=Roboto:wght@100;300&family=Teko:wght@700&display=swap&#39;);

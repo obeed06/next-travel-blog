@@ -3,6 +3,8 @@ import Document, {Html, Head, Main, NextScript} from 'next/document';
 import createEmotionServer from '@emotion/server/create-instance';
 import createEmotionCache from '../src/createEmotionCache';
 import {lightTheme, darkTheme} from '../src/theme';
+import Script from "next/script";
+import * as gtag from "../lib/gtag";
 
 export default class MyDocument extends Document {
     render() {
@@ -20,6 +22,29 @@ export default class MyDocument extends Document {
                     {/*<link href="https://fonts.cdnfonts.com/css/molot" rel="stylesheet"/>*/}
                     {/* Inject MUI styles first to match with the prepend: true configuration. */}
                     {/*{this.props.emotionStyleTags}*/}
+
+                    <script async
+                            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5359866899339122"
+                            crossOrigin="anonymous"></script>
+                    {/* Global Site Tag (gtag.js) - Google Analytics */}
+                    <Script
+                        strategy="afterInteractive"
+                        src={`https://www.googletagmanager.com/gtag/js?id=${gtag.GA_TRACKING_ID}`}
+                    />
+                    <Script
+                        id="gtag-init"
+                        strategy="afterInteractive"
+                        dangerouslySetInnerHTML={{
+                            __html: `
+                                    window.dataLayer = window.dataLayer || [];
+                                    function gtag(){dataLayer.push(arguments);}
+                                    gtag('js', new Date());
+                                    gtag('config', '${gtag.GA_TRACKING_ID}', {
+                                      page_path: window.location.pathname,
+                                    });
+                                  `,
+                        }}
+                    />
                 </Head>
                 <body>
                 <Main/>
