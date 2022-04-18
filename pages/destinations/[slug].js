@@ -26,21 +26,25 @@ export default function Destination({destination, relatedPosts, preview}) {
     const themeProps = useTheme();
     return <>
         <Meta title={"Explore " + destination.name + " | Where's Obee Blog"} description={destination.summary}
-              image={urlBuilder(getClient(false))
+            {...(destination?.bgImage ? {image: (urlBuilder(getClient(false))
                   .image(destination?.bgImage)
                   .fit('crop')
                   .width(1200)
                   .height(630)
-                  .url()} />
+                  .url()) } : {} ) } />
         <HeaderAndFooter>
             {
-                typeof (destination) !== 'undefined' && destination !== null ? (
+                typeof (destination) !== 'undefined' ? (
                     <Box>
                         <Box className={styles.destinationLanding}
-                             style={{backgroundImage: "linear-gradient(to bottom, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0.5), " + themeProps.palette.background.default + "), url(" + urlBuilder(getClient(false))
-                                     .image(destination?.bgImage)
-                                     .blur(30)
-                                     .url() + ")"}}>
+                             {...(destination?.bgImage ?
+                                 {style: ({
+                                     backgroundImage: "linear-gradient(to bottom, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0.5), " + themeProps.palette.background.default + "), url(" + urlBuilder(getClient(false))
+                                         .image(destination?.bgImage)
+                                         .blur(30)
+                                         .url() + ")"
+                                 })} : {}
+                                 )}>
                             <Grid sx={{height: "100%"}} container direction="column" justifyContent="center"
                                   alignItems="center">
                                 <Grid item className="dIcon" style={{width: '60%', height: '60%'}}>
