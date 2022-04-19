@@ -76,7 +76,7 @@ export default function Post({post, nestedHeadings, preview}) {
                             <DestinationBreadcrumbs destinations={post?.destinations}/>
                             <Grid container spacing={2}>
                                 <Grid item xs={12} md={8}>
-                                    <Box ref={postBodyBottomRef}>
+                                    <Box ref={postBodyBottomRef} className="postContent">
                                         <span ref={postBodyTopRef}></span>
                                         <PortableText value={post?.body}/>
                                     </Box>

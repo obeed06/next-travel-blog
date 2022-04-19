@@ -6,6 +6,16 @@
   --bg-mode-offset: #efefef;
 }
 
+.postContent {
+  font-size: 19px;
+}
+
+@media screen and (max-width: 768px) {
+  .postContent {
+    font-size: 17px;
+  }
+}
+
 .brandColor {
   color: var(--brand-color);
 }

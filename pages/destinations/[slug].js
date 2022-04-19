@@ -63,6 +63,14 @@ export default function Destination({destination, relatedPosts, preview}) {
                                         {destination?.name}
                                     </Typography>
                                 </Grid>
+                                <Grid item sx={{pb:3}}>
+                                    <Container maxWidth="sm">
+                                        <Typography vairant="p" component="p"
+                                                    className={styles.destinationSummary}>
+                                            {destination?.summary}
+                                        </Typography>
+                                    </Container>
+                                </Grid>
                                 <Grid item>
                                     <Scroll to="destination-content" smooth={true}>
                                         <Button variant="contained"

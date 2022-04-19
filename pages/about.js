@@ -1,5 +1,5 @@
 import styles from '../styles/about.module.css';
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useRef} from 'react';
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
@@ -87,8 +87,7 @@ export default function About({author, preview}) {
                                 <em className={styles.statNumber}>{author?.postCount}</em>
                             </div>
                         </Stack>
-
-                        <Box sx={{py: 5}}>
+                        <Box sx={{py: 5}} className="postContent">
                             <PortableText value={author?.bio}/>
                         </Box>
                     </Container>
