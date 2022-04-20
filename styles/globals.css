@@ -9,10 +9,21 @@
 .postContent {
   font-size: 19px;
 }
+figcaption {
+  padding-top: 10px;
+  font-size: 16px;
+  line-height: 140%;
+  text-align: center;
+  font-style: italic;
+  opacity: .8;
+}
 
 @media screen and (max-width: 768px) {
   .postContent {
     font-size: 17px;
+  }
+  figcaption {
+    font-size: 14px;
   }
 }
 

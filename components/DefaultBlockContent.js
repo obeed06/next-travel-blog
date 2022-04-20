@@ -20,7 +20,8 @@ const DefaultBlockContent = {
         link: ({value, children}) => {
             const target = (value?.href || '').startsWith('http') ? '_blank' : undefined
             return (
-                <Link href={value?.href} target={target} rel={target === '_blank' && 'noindex nofollow'} underline="hover">
+                <Link href={value?.href} target={target} rel={target === '_blank' && 'noindex nofollow'}
+                      underline="hover">
                     {children}
                 </Link>
             )
@@ -48,8 +49,11 @@ const Figure = props => {
         props.value,
         {imageBuilder: blockContentImageBuilder}
     );
-    return <Img {...imageProps} layout="responsive"
-                sizes="(max-width: 800px) 100vw, 800px" alt={props.value.alt || ' '}/>
+    return <figure>
+        <Img {...imageProps} layout="responsive"
+             sizes="(max-width: 800px) 100vw, 800px" alt={props.value.alt || ' '}/>
+        <figcaption>{props.value.caption}</figcaption>
+    </figure>
 }
 
 const blockContentImageBuilder = (imageUrlBuilder, options) => {
