@@ -26,6 +26,7 @@ const Footer = () => {
                     <h6 style={{textAlign: "center"}}>QUICK LINKS</h6>
                     <List dense={true}>
                         <ListItem key="footer-link-about"><Link href="/about" underline="none">About Me</Link></ListItem>
+                        <ListItem key="footer-link-privacy"><Link href="/privacy" underline="none">Privacy</Link></ListItem>
                         <ListItem key="footer-link-destinations"><Link href="/destinations" underline="none">Destinations</Link></ListItem>
                         <ListItem key="footer-link-blog"><Link href="/posts" underline="none">Blog</Link></ListItem>
                     </List>

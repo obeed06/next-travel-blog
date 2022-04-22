@@ -17,6 +17,9 @@
     text-align: center;
     letter-spacing: 0.1ch;
 }
+.postLanding span {
+    color: white;
+}
 
 @media screen and (max-width: 992px) {
     .postLanding {

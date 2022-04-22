@@ -14,6 +14,7 @@ import category from "./category";
 import destination from "./destination";
 import comment from "./comment";
 import figure from "./figure";
+import privacy from "./privacy";
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -35,5 +36,6 @@ export default createSchema({
         blockContent,
         comment,
         figure,
+        privacy,
     ]),
 })

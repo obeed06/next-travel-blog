@@ -6,7 +6,7 @@ import Grid from "@mui/material/Grid";
 import PostsGrid from "../../components/post/PostsGrid";
 import Skeleton from "@mui/material/Skeleton";
 import {useTheme} from "@mui/styles";
-import {getDestinationAndRelatedPosts, getDestinations} from "../../lib/destinationApi";
+import {getDestinationAndRelatedPosts} from "../../lib/destinationApi";
 import HeaderAndFooter from "../../components/HeaderAndFooter";
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import Button from "@mui/material/Button";
@@ -39,6 +39,11 @@ export default function Destination({destination, relatedPosts, preview}) {
                 typeof (destination) !== 'undefined' ? (
                     <Box>
                         <Box className={styles.destinationLanding}
+                             sx={{
+                                 "&::after": {
+                                     backgroundColor: themeProps.palette.background.default,
+                                 }
+                             }}
                              {...(destination?.bgImage ?
                                      {
                                          style: ({
@@ -65,8 +70,7 @@ export default function Destination({destination, relatedPosts, preview}) {
                                 </Grid>
                                 <Grid item sx={{pb:3}}>
                                     <Container maxWidth="sm">
-                                        <Typography vairant="p" component="p"
-                                                    className={styles.destinationSummary}>
+                                        <Typography vairant="p" component="p">
                                             {destination?.summary}
                                         </Typography>
                                     </Container>
@@ -187,7 +191,7 @@ export const getServerSideProps = async (pageContext, preview = false) => {
         return {
             notFound: true
         }
-    const [destination, relatedPosts] = await getDestinationAndRelatedPosts(slug, preview)
+    const [destination, relatedPosts] = await getDestinationAndRelatedPosts(slug, preview);
     return {
         props: {destination: destination, relatedPosts: relatedPosts, preview: preview},
     }

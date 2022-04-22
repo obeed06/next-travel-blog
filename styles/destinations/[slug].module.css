@@ -5,8 +5,23 @@
     background-size: cover;
     background-position: center;
     position: relative;
+    overflow: hidden;
 }
 
+.destinationLanding:after {
+    mask: url('/assets/curve.svg');
+    -webkit-mask-image: url('/assets/curve.svg');
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    transform: translateX(-50%);
+    content: '';
+    bottom: -1px;
+    width: 100%;
+    min-width: 550px;
+    backface-visibility: hidden;
+    height: 50px;
+}
 
 .destinationLanding h1 {
     font-family: var(--font-signature);
@@ -16,17 +31,23 @@
     text-align: center;
 }
 
+.destinationLanding p {
+    text-align: center;
+    color: white;
+    font-size: 18px;
+}
+
 @media screen and (max-width: 768px) {
     .destinationLanding h1 {
         font-size: 10vw;
+    }
+    .destinationLanding p {
+        font-size: 16px;
     }
 }
 @media screen and (min-width: 767px) {
     .destinationLanding h1 {
         font-size: 80px;
     }
-}
 
-.destinationSummary {
-    text-align: center;
 }

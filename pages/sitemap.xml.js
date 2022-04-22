@@ -15,6 +15,9 @@ function generateSiteMap(posts, destinations, trips) {
        <loc>${URL_BASE}/about</loc>
      </url>
      <url>
+       <loc>${URL_BASE}/privacy</loc>
+     </url>
+     <url>
        <loc>${URL_BASE}/posts</loc>
      </url>
      ${posts.map(({slug}) => {

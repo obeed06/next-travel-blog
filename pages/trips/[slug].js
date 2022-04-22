@@ -6,7 +6,7 @@ import Grid from "@mui/material/Grid";
 import DestinationsSection from "../../components/destination/DestinationsSection";
 import ItineraryMap from "../../components/trip/ItineraryMap";
 import PostsGrid from "../../components/post/PostsGrid";
-import {makeStyles} from "@mui/styles";
+import {useTheme} from "@mui/styles";
 import Skeleton from "@mui/material/Skeleton";
 import {getTripAndRelatedPosts} from "../../lib/tripApi";
 import HeaderAndFooter from "../../components/HeaderAndFooter";
@@ -16,37 +16,39 @@ import urlBuilder from "@sanity/image-url";
 import {getClient} from "../../lib/sanity";
 import Meta from "../../components/Meta";
 
-const useStyles = makeStyles((theme) => ({
-    tripLanding: {
-        "&::after": {
-            backgroundColor: theme.palette.background.default,
-        }
-    },
-}));
-
 export default function Trip({trip, relatedPosts, preview}) {
-    const classes = useStyles();
+    const themeProps = useTheme();
+
     return <>
         <Meta title={"Explore " + trip.name + " | Where's Obee Blog"}
-              {...(trip?.summary ? {description: trip.summary} : {} ) }
-              {...(trip?.hero ? {image: (urlBuilder(getClient(false))
+              {...(trip?.summary ? {description: trip.summary} : {})}
+              {...(trip?.hero ? {
+                  image: (urlBuilder(getClient(false))
                       .image(trip?.hero)
                       .fit('crop')
                       .width(1200)
                       .height(630)
-                      .url()) } : {} ) } />
+                      .url())
+              } : {})} />
         <HeaderAndFooter>
             {
                 typeof (trip) !== 'undefined' ? (
                     <Box>
-                        <Box className={`${classes.tripLanding} ${styles.tripLanding}`}
+                        <Box className={styles.tripLanding}
+                             sx={{
+                                 "&::after": {
+                                     backgroundColor: themeProps.palette.background.default,
+                                 }
+                             }}
                              {...(trip?.hero ?
-                                     {style: ({
+                                     {
+                                         style: ({
                                              backgroundImage: "linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.8)), url(" + urlBuilder(getClient(false))
                                                  .image(trip?.hero)
                                                  .blur(30)
                                                  .url() + ")"
-                                         })} : {}
+                                         })
+                                     } : {}
                              )}>
                             <Grid sx={{height: "100%"}} container direction="column" justifyContent="center"
                                   alignItems="center">
@@ -55,7 +57,7 @@ export default function Trip({trip, relatedPosts, preview}) {
                                 </Typography>
                             </Grid>
                         </Box>
-                        { trip?.summary ? (
+                        {trip?.summary ? (
                             <Container maxWidth='sm'
                                        sx={{pt: 5, textAlign: 'center', fontFamily: 'var(--font-heading-primary)'}}>
                                 <PortableText value={trip?.summary}/>
@@ -66,14 +68,14 @@ export default function Trip({trip, relatedPosts, preview}) {
                         <DestinationsSection destinations={trip?.destinations}/>
                         <ItineraryMap itinerary={trip?.itinerary} bgOverride={trip?.thumbnail}/>
                     </span>
-                        { trip?.breakdown ? (
+                        {trip?.breakdown ? (
                             <Container maxWidth='lg' sx={{
                                 py: 5,
                             }}>
                                 <Typography vairant="h1" component="h2" className="sectionHeader">
                                     Breakdown.
                                 </Typography>
-                                <PortableText value={trip?.breakdown} />
+                                <PortableText value={trip?.breakdown}/>
                             </Container>
                         ) : ""}
 
@@ -108,7 +110,7 @@ export const getServerSideProps = async (pageContext, preview = false) => {
             notFound: true
         }
 
-    const [trip, relatedPosts] = await  getTripAndRelatedPosts(slug, preview)
+    const [trip, relatedPosts] = await getTripAndRelatedPosts(slug, preview)
     return {
         props: {trip: trip, relatedPosts: relatedPosts, preview: preview},
     }
