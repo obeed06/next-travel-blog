@@ -20,7 +20,7 @@ export default function Trip({trip, relatedPosts, preview}) {
     const themeProps = useTheme();
 
     return <>
-        <Meta title={"Explore " + trip.name + " | Where's Obee Blog"}
+        <Meta title={"Explore " + trip?.name + " | Where's Obee Blog"}
               {...(trip?.summary ? {description: trip.summary} : {})}
               {...(trip?.hero ? {
                   image: (urlBuilder(getClient(false))

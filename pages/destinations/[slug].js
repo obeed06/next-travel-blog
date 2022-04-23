@@ -88,11 +88,12 @@ export default function Destination({destination, relatedPosts, preview}) {
                             <Tabs variant="scrollable"
                                   scrollButtons="auto"
                                   aria-label="related destinations links">
-                                {getPickRegions(destination?.continent, destination?.regions)}
-                                {getPickCountries(destination?.countries)}
+                                {getPickDestinationTab(destination?.relatedDestinations, 'Pick a region')}
+                                {getPickDestinationTab(destination?.regions, 'Pick a region')}
+                                {getPickDestinationTab(destination?.countries, 'Pick a country')}
+                                {getPickDestinationTab(destination?.areas, 'Pick an area' )}
                                 {getPickTrips(destination?.trips)}
                             </Tabs>
-
                             <Divider/>
                         </Container>
                         <span className="sections">
@@ -139,34 +140,15 @@ function LinkTab(props) {
     );
 }
 
-function getPickRegions(continent, regions) {
-    if (!continent && (!Array.isArray(regions) || regions.length === 0))
+function getPickDestinationTab(destinations, label) {
+    if (!Array.isArray(destinations) || destinations.length === 0)
         return;
     return <>
-        <Tab disabled sx={{textTransform: "uppercase"}} label="Pick a region"/>
+        <Tab disabled sx={{textTransform: "uppercase"}} label={label}/>
         <Divider sx={{mx: 1}} orientation="vertical" variant="middle" flexItem/>
-        {(continent) !== 'undefined' && continent !== null ? (
-            <LinkTab style={{zIndex: 5}} label={continent?.name} href={"/destinations/" + continent?.slug} />
-        ) : (
-            <></>
-        )}
-        {Array.isArray(regions) && regions.map(region => (
-            <LinkTab key={region?.name} style={{zIndex: 5}} label={region?.name}
-                     href={"/destinations/" + region?.slug}/>
-        ))}
-    </>
-}
-
-function getPickCountries(countries) {
-    if (!Array.isArray(countries) || countries.length === 0)
-        return;
-
-    return <>
-        <Tab disabled sx={{textTransform: "uppercase"}} label="Pick a country"/>
-        <Divider sx={{mx: 1}} orientation="vertical" variant="middle" flexItem/>
-        {Array.isArray(countries) && countries.map(country => (
-            <LinkTab key={country?.name} style={{zIndex: 5}} label={country?.name}
-                     href={"/destinations/" + country?.slug}/>
+        {Array.isArray(destinations) && destinations.map(destination => (
+            <LinkTab key={destination?.name} style={{zIndex: 5}} label={destination?.name}
+                     href={"/destinations/" + destination?.slug}/>
         ))}
     </>
 }
@@ -191,7 +173,7 @@ export const getServerSideProps = async (pageContext, preview = false) => {
         return {
             notFound: true
         }
-    const [destination, relatedPosts] = await getDestinationAndRelatedPosts(slug, preview);
+    const [destination, relatedPosts] = await getDestinationAndRelatedPosts(slug, preview)
     return {
         props: {destination: destination, relatedPosts: relatedPosts, preview: preview},
     }

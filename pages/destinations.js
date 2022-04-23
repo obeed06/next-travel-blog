@@ -115,18 +115,9 @@ function searchDestinations(destinations, q, qType) {
 
     return destinations.filter((item) => {
 
-        if (qType === "sub-region")
-            return item && Array.isArray(item?.regions) && item.regions.find(el => el.name.toLowerCase() === q.toLowerCase());
+        if (qType === "sub-region" || qType === "continent")
+            return item && Array.isArray(item?.relatedDestinations) && item.relatedDestinations.find(el => el.name.toLowerCase() === q.toLowerCase());
 
-        if (qType === "continent")
-            return ["continent.name"].some((newItem) => {
-                return (
-                    newItem.split('.').reduce((p, c) => (p && p[c]) || null, item)
-                        .toString()
-                        .toLowerCase()
-                        .indexOf(q.toLowerCase()) > -1
-                );
-            });
 
         if (qType === "search")
             return ["name"].some((newItem) => {

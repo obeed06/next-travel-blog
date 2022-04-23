@@ -25,32 +25,25 @@ export default {
             },
         },
         {
-            name: 'isCountry',
-            title: 'Is Country?',
-            type: 'boolean',
-        },
-        {
-            name: 'isContinent',
-            title: 'Is Continent?',
-            type: 'boolean',
-        },
-        {
-            name: 'isRegion',
-            title: 'Is Region?',
-            type: 'boolean',
-        },
-        {
-            name: 'continent',
-            title: 'Continent',
-            type: 'reference',
-            to: {type: 'destination'},
-            options: { filter: "isContinent == true"}
-        },
-        {
-            name: 'regions',
-            title: 'Regions',
+            title: 'Region Types',
+            name: 'regionTypes',
             type: 'array',
-            of: [{type: 'reference', to: {type: 'destination'}, options: { filter: "isRegion == true"}}],
+            of: [{type: 'string'}],
+            options: {
+                list: [
+                    {title: 'Continent', value: 'continent'},
+                    {title: 'Region', value: 'region'},
+                    {title: 'Country', value: 'country'},
+                    {title: 'Area', value: 'area'}
+                ]
+            }
+        },
+        {
+            name: 'relatedDestinations',
+            title: 'Related Destinations',
+            type: 'array',
+            of: [{type: 'reference', to: {type: 'destination'}}],
+            hidden: ({document}) => document?.regionTypes.includes("continent"),
         },
         {
             name: 'slug',
