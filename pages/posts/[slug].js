@@ -72,7 +72,7 @@ export default function Post({post, nestedHeadings, preview}) {
                                 </Stack>
                             </Grid>
                         </Box>
-                        <Container maxWidth='md' sx={{my: 5}}>
+                        <Container maxWidth='lg' sx={{my: 5}}>
                             <DestinationBreadcrumbs destinations={post?.destinations}/>
                             <Grid container spacing={2}>
                                 <Grid item xs={12} md={8}>
