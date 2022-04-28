@@ -20,6 +20,19 @@ export default class MyDocument extends Document {
                     {/*<link href="https://fonts.cdnfonts.com/css/molot" rel="stylesheet"/>*/}
                     {/* Inject MUI styles first to match with the prepend: true configuration. */}
                     {/*{this.props.emotionStyleTags}*/}
+                    <script
+                        async
+                        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+                    />
+                    <script
+                        dangerouslySetInnerHTML={{
+                            __html: `
+                               (adsbygoogle = window.adsbygoogle || []).push({
+                                   google_ad_client: "ca-pub-5359866899339122",
+                                   enable_page_level_ads: true
+                              });`
+                        }}
+                    />
                 </Head>
                 <body>
                 <Main/>
