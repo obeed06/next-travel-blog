@@ -11,6 +11,10 @@ import SkeletonHeroPostCard from "./SkeletonHeroPostCard";
 
 export default function PostsGrid({postsData, checked, header, actions}) {
     const matches = useMediaQuery('(min-width:656px)');
+
+    if (Array.isArray(postsData) && postsData.length === 0)
+        return <></>
+
     return (
         <Box id="recentPosts">
             {matches ?
