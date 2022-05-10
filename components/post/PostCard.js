@@ -61,7 +61,7 @@ export default function PostCard({post}) {
                         </Typography>
                         <Divider sx={{my: 1}} style={{borderColor: "rgba(255, 255, 255, 0.15)"}}/>
                         <span
-                            className="postCardAuthor">By {post.author.name} on {Moment(post.date).format('DD MMMM YYYY')}</span>
+                            className="postCardAuthor">By {post.author.name} on {Moment(post.publishedAt).format('DD MMMM YYYY')}</span>
                     </CardContent>
                 </CardActionArea>
             </Card>

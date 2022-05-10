@@ -27,7 +27,7 @@ export default function MobilePostCard({post}) {
                     </Typography>
                     <Divider style={{borderColor: "rgba(255, 255, 255, 0.15)", width: "75%"}}/>
                     <span
-                        className="postCardAuthor">By {post.author.name} on {Moment(post.date).format('DD MMMM YYYY')}</span>
+                        className="postCardAuthor">By {post.author.name} on {Moment(post.publishedAt).format('DD MMMM YYYY')}</span>
                 </Stack>
             </Paper>
         </Link>
