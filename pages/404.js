@@ -13,7 +13,7 @@ export default function FourOhFour() {
                     404
                 </Typography>
                 <Box sx={{py: 5}} className="postContent">
-                    <p>You're in the wrong place! In life that's fine, but here there's nothing to do :/</p>
+                    <p>You&apos;re in the wrong place! In life that's fine, but here there&apos;s nothing to do :/</p>
                     <p>Lets go <Link href="/" underline="none">Home</Link>.</p>
                 </Box>
             </Container>
