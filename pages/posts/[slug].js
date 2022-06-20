@@ -149,7 +149,12 @@ export const getServerSideProps = async (pageContext, preview = false) => {
         }
 
     const post = await getPostAndRelatedPostsForCategory(slug, preview)
-    const nestedHeadings = typeof (post) !== 'undefined' && post !== null ? getHeadingsFromPostBodyJson(post?.body) : []
+    if (!post)
+        return {
+            notFound: true
+        }
+
+    const nestedHeadings = typeof (post) !== 'undefined' ? getHeadingsFromPostBodyJson(post?.body) : []
 
     return {
         props: {post: post, nestedHeadings: nestedHeadings, preview: preview},

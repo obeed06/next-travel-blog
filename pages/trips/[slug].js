@@ -18,7 +18,6 @@ import Meta from "../../components/Meta";
 
 export default function Trip({trip, relatedPosts, preview}) {
     const themeProps = useTheme();
-
     return <>
         <Meta title={"Explore " + trip?.name + " | Where's Obee Blog"}
               {...(trip?.summary ? {description: trip.summary} : {})}
@@ -111,6 +110,12 @@ export const getServerSideProps = async (pageContext, preview = false) => {
         }
 
     const [trip, relatedPosts] = await getTripAndRelatedPosts(slug, preview)
+
+    if (!trip)
+        return {
+            notFound: true
+        }
+
     return {
         props: {trip: trip, relatedPosts: relatedPosts, preview: preview},
     }

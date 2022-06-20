@@ -174,6 +174,10 @@ export const getServerSideProps = async (pageContext, preview = false) => {
             notFound: true
         }
     const [destination, relatedPosts] = await getDestinationAndRelatedPosts(slug, preview)
+    if (!destination)
+        return {
+            notFound: true
+        }
     return {
         props: {destination: destination, relatedPosts: relatedPosts, preview: preview},
     }
