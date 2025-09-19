@@ -19,9 +19,7 @@ const ItineraryMap = ({itinerary, bgOverride = null}) => {
     const classes = useStyles();
     const [isMapLoaded, setIsMapLoaded] = useState(false)
     const parallaxController = useParallaxController();
-
     const handleLoad = () => parallaxController.update();
-
 
     return (
         <Box id="mapSection" className={[classes.mapSection, "section"]}  sx={{py: 5}}
@@ -35,7 +33,7 @@ const ItineraryMap = ({itinerary, bgOverride = null}) => {
             </Parallax>
             <Container maxWidth="lg">
                 {
-                    !isMapLoaded ? <MapPlaceholder data={itinerary?.placeholder} loadMap={() => {
+                    !isMapLoaded ? <MapPlaceholder data={itinerary} loadMap={() => {
                             setIsMapLoaded(true);
                         }}/> :
                         <iframe title="embedded-travel-map" src={itinerary?.iframeLink} style={{position: "relative", zIndex: 4}}

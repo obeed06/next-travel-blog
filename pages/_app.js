@@ -1,24 +1,24 @@
 import '../styles/globals.css'
-import {ThemeProvider} from "@mui/material/styles";
-import {useEffect, useState} from "react";
-import {ParallaxProvider} from "react-scroll-parallax";
-import {config} from '@fortawesome/fontawesome-svg-core'
+import { ThemeProvider } from "@mui/material/styles";
+import { useEffect, useState } from "react";
+import { ParallaxProvider } from "react-scroll-parallax";
+import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
-import {library} from '@fortawesome/fontawesome-svg-core'
-import {fab} from '@fortawesome/free-brands-svg-icons'
-import {faCheckSquare, faCoffee} from '@fortawesome/free-solid-svg-icons'
-import {CssBaseline} from "@mui/material";
-import {useMediaQuery} from "@mui/material";
-import {lightTheme, darkTheme} from '../src/theme';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fab } from '@fortawesome/free-brands-svg-icons'
+import { faCheckSquare, faCoffee } from '@fortawesome/free-solid-svg-icons'
+import { CssBaseline } from "@mui/material";
+import { useMediaQuery } from "@mui/material";
+import { lightTheme, darkTheme } from '../src/theme';
 import createEmotionCache from "../src/createEmotionCache";
 import ColorModeContext from "../src/ColorModeContext";
-import {CacheProvider} from "@emotion/react";
-import {PortableTextComponentsProvider} from "@portabletext/react";
+import { CacheProvider } from "@emotion/react";
+import { PortableTextComponentsProvider } from "@portabletext/react";
 import DefaultBlockContent from "../components/DefaultBlockContent";
 import Head from "next/head";
 import PropTypes from 'prop-types';
 import * as gtag from '../lib/gtag'
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
 import Script from "next/script";
 
 config.autoAddCss = false
@@ -28,7 +28,7 @@ library.add(fab, faCheckSquare, faCoffee)
 const clientSideEmotionCache = createEmotionCache();
 
 export default function MyApp(props) {
-    const {Component, emotionCache = clientSideEmotionCache, pageProps} = props;
+    const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
     const router = useRouter()
     useEffect(() => {
         const handleRouteChange = (url) => {
@@ -62,15 +62,15 @@ export default function MyApp(props) {
     return (
         <CacheProvider value={emotionCache}>
             <Head>
-                <meta name="viewport" content="initial-scale=1, width=device-width"/>
+                <meta name="viewport" content="initial-scale=1, width=device-width" />
                 <style>
                     @import
                     url(&#39;https://fonts.googleapis.com/css2?family=Bungee&family=Bungee+Outline&family=Nunito+Sans:wght@900&family=Roboto:wght@100;300&family=Teko:wght@700&display=swap&#39;);
                 </style>
             </Head>
-            <ColorModeContext.Provider value={{darkMode, setDarkMode: _setDarkMode}}>
+            <ColorModeContext.Provider value={{ darkMode, setDarkMode: _setDarkMode }}>
                 <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
-                    <CssBaseline/>
+                    <CssBaseline />
                     <PortableTextComponentsProvider components={DefaultBlockContent}>
                         <ParallaxProvider>
                             <Script

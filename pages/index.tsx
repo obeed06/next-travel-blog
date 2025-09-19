@@ -4,23 +4,23 @@ import Meta from "../components/Meta";
 import ItineraryMap from "../components/trip/ItineraryMap";
 import WelcomeParallax from "../components/WelcomeParallax";
 import PostsSection from "../components/post/PostsSection";
-import {getRecentPosts} from "../lib/postApi";
-import {getHomeItinerary} from "../lib/itineraryApi";
-import {getTrips} from "../lib/tripApi";
+import { getRecentPosts } from "../lib/postApi";
+import { getHomeItinerary } from "../lib/itineraryApi";
+import { getTrips } from "../lib/tripApi";
 import HeaderAndFooter from "../components/HeaderAndFooter";
 import React from "react";
 
-export default function index({trips, itinerary, recentPosts}) {
+export default function index({ trips, itinerary, recentPosts }) {
     return (
         <>
-            <Meta/>
+            <Meta />
             <HeaderAndFooter>
-                <WelcomeParallax/>
+                <WelcomeParallax />
                 <span className="sections">
-                    <AboutSummary/>
-                    <Trips trips={trips}/>
-                    <ItineraryMap itinerary={itinerary}/>
-                    <PostsSection posts={recentPosts}/>
+                    <AboutSummary />
+                    <Trips trips={trips} />
+                    <ItineraryMap itinerary={itinerary} />
+                    <PostsSection posts={recentPosts} />
                 </span>
             </HeaderAndFooter>
         </>
@@ -33,7 +33,7 @@ export async function getStaticProps() {
     const recentPosts = await getRecentPosts()
 
     return {
-        props: {trips, itinerary, recentPosts},
+        props: { trips, itinerary, recentPosts },
         revalidate: 1
     }
 }

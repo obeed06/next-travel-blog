@@ -19,12 +19,19 @@ const MapPlaceholder = ({ data, loadMap }) => {
     });
     const imageProps = useNextSanityImage(
         sanityClient,
-        data?.asset,
-        { imageBuilder: myCustomImageBuilder }
+        data?.placeholder,
     );
     return (
         <Box sx={{ height: '500', width: '100%', position: 'relative', zIndex: 4 }} id="mapHolder">
-            <Img className={styles.mapPlaceholder} {...imageProps} layout="responsive" sizes="(max-width: 800px) 100vw, 800px" alt="travel map placeholder" />
+            {imageProps && (
+                <Img
+                    className={styles.mapPlaceholder}
+                    {...imageProps}
+                    layout="responsive"
+                    sizes="(max-width: 800px) 100vw, 800px"
+                    alt={data.placeholder?.alt || "travel map placeholder"}
+                />
+            )}
             <div className={styles.overlay}
                 onMouseOver={() => setState({ raised: true })}
                 onMouseOut={() => setState({ raised: false })}>
@@ -43,7 +50,6 @@ const MapPlaceholder = ({ data, loadMap }) => {
                         <TravelExploreRoundedIcon className={styles.placeholderIcon} />
                     </IconButton>
                 </Grid>
-
             </div>
         </Box>
     );
