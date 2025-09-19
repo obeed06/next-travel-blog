@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {Link as Scroll} from "react-scroll";
 import {makeStyles} from "@mui/styles";
 import Grid from "@mui/material/Grid";

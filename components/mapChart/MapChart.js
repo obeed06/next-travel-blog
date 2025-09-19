@@ -10,7 +10,7 @@ import ColorModeContext from "../../src/ColorModeContext";
 const excluded = ["Antarctica"]
 
 const geoUrl =
-    "https://raw.githubusercontent.com/deldersveld/topojson/master/world-countries.json";
+    "../world-countries.json";
 
 const MapChart = ({visitedGeos}) => {
     const { darkMode } = useContext(ColorModeContext);
