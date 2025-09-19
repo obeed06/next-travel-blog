@@ -41,7 +41,7 @@ export default function TripCard({slugPrefix, item, checked, timeout = 1}) {
                 <CardActionArea href={slugPrefix+item.slug} key={item.slug}>
                     <CardMedia
                         className={classes.media}
-                        image={item.thumbnail.url}
+                        image={item.thumbnail.asset.url}
                         alt={item.thumbnail.alt}
                     />
                     <CardContent>

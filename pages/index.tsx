@@ -10,7 +10,7 @@ import {getTrips} from "../lib/tripApi";
 import HeaderAndFooter from "../components/HeaderAndFooter";
 import React from "react";
 
-export default function index({trips, itinerary, recentPosts, preview}) {
+export default function index({trips, itinerary, recentPosts}) {
     return (
         <>
             <Meta/>
@@ -27,13 +27,13 @@ export default function index({trips, itinerary, recentPosts, preview}) {
     );
 }
 
-export async function getStaticProps({preview = false}) {
-    const trips = await getTrips(preview)
-    const itinerary = await getHomeItinerary(preview)
-    const recentPosts = await getRecentPosts(preview)
+export async function getStaticProps() {
+    const trips = await getTrips()
+    const itinerary = await getHomeItinerary()
+    const recentPosts = await getRecentPosts()
 
     return {
-        props: {trips, itinerary, recentPosts, preview},
+        props: {trips, itinerary, recentPosts},
         revalidate: 1
     }
 }

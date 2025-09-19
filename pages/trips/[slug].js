@@ -16,7 +16,7 @@ import urlBuilder from "@sanity/image-url";
 import { sanityClient } from "../../lib/sanity";
 import Meta from "../../components/Meta";
 
-export default function Trip({ trip, relatedPosts, preview }) {
+export default function Trip({ trip, relatedPosts }) {
     const themeProps = useTheme();
     return <>
         <Meta title={"Explore " + trip?.name + " | Where's Obee Blog"}
@@ -101,7 +101,7 @@ export default function Trip({ trip, relatedPosts, preview }) {
     </>
 };
 
-export const getServerSideProps = async (pageContext, preview = false) => {
+export const getServerSideProps = async (pageContext) => {
     const slug = pageContext.query.slug
 
     if (!slug)
@@ -109,7 +109,7 @@ export const getServerSideProps = async (pageContext, preview = false) => {
             notFound: true
         }
 
-    const [trip, relatedPosts] = await getTripAndRelatedPosts(slug, preview)
+    const [trip, relatedPosts] = await getTripAndRelatedPosts(slug)
 
     if (!trip)
         return {
@@ -117,6 +117,6 @@ export const getServerSideProps = async (pageContext, preview = false) => {
         }
 
     return {
-        props: { trip: trip, relatedPosts: relatedPosts, preview: preview },
+        props: { trip: trip, relatedPosts: relatedPosts },
     }
 }
