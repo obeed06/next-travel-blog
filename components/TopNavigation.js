@@ -63,7 +63,7 @@ const TopNavigation = props => {
             <List sx={{flexGrow: 1, height: "100%"}}>
                 {pages.map((page, index) =>
                     <ListItemButton key={"mobile-nav-" + page.title}>
-                        <Link to={page.href} underline="none"><ListItemText primary={page.title}/></Link>
+                        <Link href={page.href} underline="none"><ListItemText primary={page.title}/></Link>
                     </ListItemButton>
                 )}
             </List>
@@ -86,8 +86,15 @@ const TopNavigation = props => {
                     }}>
                         {/*Desktop Logo*/}
                         <Link sx={{mr: 2, display: {xs: 'none', md: 'flex'}}} href={"/"}>
-                            <Image height="65px" width="65px" src={'/assets/logo-with-title.png'}
-                                   alt="logo with title"/>
+                            <Image
+                                height="65"
+                                width="65"
+                                src={'/assets/logo-with-title.png'}
+                                alt="logo with title"
+                                style={{
+                                    maxWidth: "100%",
+                                    height: "auto"
+                                }} />
                         </Link>
 
                         {/*Mobile hamburger icon*/}
@@ -108,7 +115,7 @@ const TopNavigation = props => {
                         <Box sx={{flexGrow: 1, display: {xs: 'none', md: 'flex'}}}>
                             {pages.map((page) => (
                                 <Link key={"desktop-nav-" + page.title}
-                                      to={page.href}
+                                      href={page.href}
                                       underline="none">
                                     <Button sx={{my: 2, color: 'white', display: 'block'}} >
                                         {page.title}
@@ -123,14 +130,19 @@ const TopNavigation = props => {
                             position: {xs: 'absolute', md: ''},
                             top: {xs: '25px', md: ''}
                         }} href={"/"}>
-                            <Image height="65px" width="65px"
-                                 src={'/assets/logo-with-title.png'}
-                                 alt="logo with title"/>
+                            <Image
+                                height="65"
+                                width="65"
+                                src={'/assets/logo-with-title.png'}
+                                alt="logo with title"
+                                style={{
+                                    maxWidth: "100%",
+                                    height: "auto"
+                                }} />
                         </Link>
                     </Toolbar>
                 </AppBar>
             </HideOnScroll>
-
             <Box
                 component="nav"
                 sx={{width: {sm: drawerWidth}, flexShrink: {sm: 0}}}
@@ -156,7 +168,6 @@ const TopNavigation = props => {
                 </SwipeableDrawer>
             </Box>
             {props?.postToC}
-
         </React.Fragment>
     );
 }

@@ -47,11 +47,19 @@ const Figure = props => {
         props.value,
         { imageBuilder: blockContentImageBuilder }
     );
-    return <figure>
-        <Img {...imageProps} layout="responsive"
-            sizes="(max-width: 800px) 100vw, 800px" alt={props.value.alt || ' '} />
-        <figcaption>{props.value.caption}</figcaption>
-    </figure>
+    return (
+        <figure>
+            <Img
+                {...imageProps}
+                alt={props.value.alt || ' '}
+                sizes="(max-width: 800px) 100vw, 800px"
+                style={{
+                    width: "100%",
+                    height: "auto"
+                }} />
+            <figcaption>{props.value.caption}</figcaption>
+        </figure>
+    );
 }
 
 const blockContentImageBuilder = (imageUrlBuilder, options) => {

@@ -4,9 +4,6 @@ import { useEffect, useState } from "react";
 import { ParallaxProvider } from "react-scroll-parallax";
 import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { fab } from '@fortawesome/free-brands-svg-icons'
-import { faCheckSquare, faCoffee } from '@fortawesome/free-solid-svg-icons'
 import { CssBaseline } from "@mui/material";
 import { useMediaQuery } from "@mui/material";
 import { lightTheme, darkTheme } from '../src/theme';
@@ -20,11 +17,9 @@ import PropTypes from 'prop-types';
 import * as gtag from '../lib/gtag'
 import { useRouter } from "next/router";
 import Script from "next/script";
+import '../lib/fontawesome';
 
 config.autoAddCss = false
-library.add(fab, faCheckSquare, faCoffee)
-
-// Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
 
 export default function MyApp(props) {
@@ -51,10 +46,6 @@ export default function MyApp(props) {
         setDarkMode(mode);
     }, []);
 
-    // useEffect(() => {
-    //   console.log(`set localStore ${darkMode}`);
-    //   localStorage.setItem("mode", darkMode);
-    // }, [darkMode]);
     const _setDarkMode = (newmode) => {
         localStorage.setItem("mode", newmode);
         setDarkMode(newmode);
@@ -65,7 +56,7 @@ export default function MyApp(props) {
                 <meta name="viewport" content="initial-scale=1, width=device-width" />
                 <style>
                     @import
-                    url(&#39;https://fonts.googleapis.com/css2?family=Bungee&family=Bungee+Outline&family=Nunito+Sans:wght@900&family=Roboto:wght@100;300&family=Teko:wght@700&display=swap&#39;);
+                    url('https://fonts.googleapis.com/css2?family=Bungee&family=Bungee+Outline&family=Nunito+Sans:wght@900&family=Roboto:wght@100;300&family=Teko:wght@700&display=swap');
                 </style>
             </Head>
             <ColorModeContext.Provider value={{ darkMode, setDarkMode: _setDarkMode }}>
