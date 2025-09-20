@@ -44,7 +44,6 @@ const Figure = props => {
         props.value,
         { imageBuilder: blockContentImageBuilder }
     );
-    console.log('figure image props --------------', imageProps)
     return (
         <figure>
             <Image

@@ -1,5 +1,4 @@
 import styles from './DestinationCard.module.css';
-import React from 'react';
 import {Card, CardContent, CardActionArea} from '@mui/material';
 import Link from "../../src/Link";
 
@@ -17,6 +16,5 @@ export default function DestinationCard({destination}) {
                 </CardActionArea>
             </Card>
         </Link>
-
     );
 }

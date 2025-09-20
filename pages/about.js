@@ -1,5 +1,5 @@
 import styles from '../styles/about.module.css';
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
@@ -9,6 +9,7 @@ import Divider from "@mui/material/Divider";
 import Moment from "moment";
 import Typed from "typed.js";
 import Avatar from "@mui/material/Avatar";
+import DefaultBlockContent from "../components/DefaultBlockContent";
 import { PortableText } from "@portabletext/react";
 import { getAuthorDetails } from "../lib/authorApi";
 import HeaderAndFooter from "../components/HeaderAndFooter";
@@ -87,7 +88,7 @@ export default function About({ author, preview }) {
                             </div>
                         </Stack>
                         <Box sx={{ py: 5 }} className="postContent">
-                            <PortableText value={author?.bio} />
+                            <PortableText value={author?.bio} components={DefaultBlockContent} />
                         </Box>
                     </Container>
                 ) : (

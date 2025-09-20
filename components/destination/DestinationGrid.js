@@ -18,14 +18,14 @@ const DestinationGrid = ({destinations}) => {
                         destinations ?
                             (
                                 destinations.map((destination, i) => (
-                                    <Grid sm={6} md={4} lg={3} item key={i}><DestinationCard destination={destination}/></Grid>
+                                    <Grid size={{ sm: 6, md: 4, lg: 3 }} item key={i}><DestinationCard destination={destination}/></Grid>
 
                                 ))
                             ) : (
                                 <React.Fragment>
                                     {
                                         [...Array(16)].map((e, i) => (
-                                            <Grid sm={6} md={4} lg={3} item key={"skeleton-c-" + i}>
+                                            <Grid size={{ sm: 6, md: 4, lg: 3 }} item key={"skeleton-c-" + i}>
                                                 <SkeletonDestinationCard/>
                                             </Grid>
                                         ))

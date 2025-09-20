@@ -11,6 +11,7 @@ import Container from "@mui/material/Container";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import Chip from "@mui/material/Chip";
+import DefaultBlockContent from "../../components/DefaultBlockContent";
 import { PortableText } from "@portabletext/react";
 import { getPostAndRelatedPostsForCategory } from "../../lib/postApi";
 import { getHeadingsFromPostBodyJson } from "../../lib/postUtils";
@@ -71,10 +72,10 @@ export default function Post({ post, nestedHeadings }) {
                         <Container maxWidth='lg' sx={{ my: 5 }}>
                             <DestinationBreadcrumbs destinations={post?.destinations} />
                             <Grid container spacing={2}>
-                                <Grid item xs={12} md={8}>
+                                <Grid item size={{ xs: 12, md: 8 }}>
                                     <Box ref={postBodyBottomRef} className="postContent">
                                         <span ref={postBodyTopRef}></span>
-                                        <PortableText value={post?.body} />
+                                        <PortableText value={post?.body} components={DefaultBlockContent} />
                                     </Box>
                                 </Grid>
                             </Grid>
