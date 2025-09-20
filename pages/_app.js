@@ -5,7 +5,6 @@ import { ParallaxProvider } from "react-scroll-parallax";
 import { config } from '@fortawesome/fontawesome-svg-core'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 import { CssBaseline } from "@mui/material";
-import { useMediaQuery } from "@mui/material";
 import { lightTheme, darkTheme } from '../src/theme';
 import createEmotionCache from "../src/createEmotionCache";
 import ColorModeContext from "../src/ColorModeContext";
@@ -34,14 +33,18 @@ export default function MyApp(props) {
             router.events.off('hashChangeComplete', handleRouteChange)
         }
     }, [router.events])
-    // Set dark mode based on media query
-    const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
-    const [darkMode, setDarkMode] = useState(prefersDarkMode);
+
+    const [darkMode, setDarkMode] = useState(false);
 
     useEffect(() => {
-        const mode = localStorage.getItem("mode") === "true";
-        // set mode
-        setDarkMode(mode);
+        const storedMode = localStorage.getItem("mode");
+
+        if (storedMode !== null) {
+            setDarkMode(storedMode === "true");
+        } else {
+            const prefersDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+            setDarkMode(prefersDarkMode);
+        }
     }, []);
 
     const _setDarkMode = (newmode) => {

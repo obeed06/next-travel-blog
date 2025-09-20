@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Divider from "@mui/material/Divider";
@@ -15,6 +14,8 @@ import Stack from "@mui/material/Stack";
 import ColorModeContext from "../src/ColorModeContext";
 import { useTheme } from '@mui/material/styles';
 import Link from "../src/Link";
+import { faGithub, faLinkedin, faTwitter, faInstagram } from "@fortawesome/free-brands-svg-icons";
+import ClientFontAwesomeIcon from "./ClientFontAwesomeIcon";
 
 const Footer = () => {
     const theme = useTheme();
@@ -33,12 +34,18 @@ const Footer = () => {
                 </Grid>
                 <Grid>
                     <h6 style={{ textAlign: "center" }}>STAY CONNECTED</h6>
-                    <IconButton href="https://github.com/obeed06" target="_blank"><FontAwesomeIcon icon={['fab', 'github']} /></IconButton>
-                    <IconButton href="https://www.instagram.com/wheresobee/" target="_blank"><FontAwesomeIcon icon={['fab', 'instagram']} /></IconButton>
-                    <IconButton href="https://www.facebook.com/david.obee" target="_blank"><FontAwesomeIcon icon={['fab', 'facebook']} /></IconButton>
-                    <IconButton href="https://www.linkedin.com/in/david-obee-49153941" target="_blank"><FontAwesomeIcon icon={['fab', 'linkedin']} /></IconButton>
-                    <IconButton href="https://twitter.com/davidobee" target="_blank"><FontAwesomeIcon icon={['fab', 'twitter']} /></IconButton>
-                    <IconButton href="https://www.youtube.com/channel/UCrG29-sOLEvxYbNqTtuJhrg" target="_blank"><FontAwesomeIcon icon={['fab', 'youtube']} /></IconButton>
+                    <IconButton href="https://github.com/obeed06" target="_blank">
+                        <ClientFontAwesomeIcon icon={faGithub} />
+                    </IconButton>
+                    <IconButton href="https://www.linkedin.com/in/david-obee-283084128/" target="_blank">
+                        <ClientFontAwesomeIcon icon={faLinkedin} />
+                    </IconButton>
+                    <IconButton href="https://twitter.com/obee_one_" target="_blank">
+                        <ClientFontAwesomeIcon icon={faTwitter} />
+                    </IconButton>
+                    <IconButton href="https://www.instagram.com/obee_one" target="_blank">
+                        <ClientFontAwesomeIcon icon={faInstagram} />
+                    </IconButton>
                 </Grid>
             </Grid>
             <Divider />
