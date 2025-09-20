@@ -28,26 +28,23 @@ export default function PostsGrid({ postsData, checked, header, actions }) {
                                     postsData.map((post, i) => {
                                         if (i === 0)
                                             return (
-                                                <>
-                                                    <Grid size={{ sm: 12 }} item key={i}>
-                                                        <HeroPostCard post={post} />
-                                                    </Grid>
-                                                </>
-
+                                                <Grid size={{ sm: 12 }} key={i}>
+                                                    <HeroPostCard post={post} />
+                                                </Grid>
                                             );
                                         return (
-                                            <Grid size={{ sm: 6, md: 4, lg: 3 }} item key={i}><PostCard post={post} key={i}
+                                            <Grid size={{ sm: 6, md: 4, lg: 3 }} key={i}><PostCard post={post} key={i}
                                                 checked={checked} /></Grid>
                                         );
                                     })
                                 ) : (
                                     <React.Fragment>
-                                        <Grid size={{ sm: 12 }} item key="skeleton-hfp">
+                                        <Grid size={{ sm: 12 }} key="skeleton-hfp">
                                             <SkeletonHeroPostCard />
                                         </Grid>
                                         {
                                             [...Array(8)].map((e, i) => (
-                                                <Grid size={{ sm: 6, md: 4, lg: 3 }} item key={"skeleton-p-" + i}>
+                                                <Grid size={{ sm: 6, md: 4, lg: 3 }} key={"skeleton-p-" + i}>
                                                     <SkeletonPostCard />
                                                 </Grid>
                                             ))
@@ -65,7 +62,7 @@ export default function PostsGrid({ postsData, checked, header, actions }) {
                         sx={{ position: "relative" }}>
                         {postsData &&
                             postsData.map((post, i) => (
-                                <Grid item key={"mobile-post-" + i}><MobilePostCard post={post} /></Grid>
+                                <Grid key={"mobile-post-" + i}><MobilePostCard post={post} /></Grid>
                             ))}
                         {actions}
                     </Grid>

@@ -18,14 +18,14 @@ const DestinationGrid = ({destinations}) => {
                         destinations ?
                             (
                                 destinations.map((destination, i) => (
-                                    <Grid size={{ sm: 6, md: 4, lg: 3 }} item key={i}><DestinationCard destination={destination}/></Grid>
+                                    <Grid size={{ sm: 6, md: 4, lg: 3 }} key={i}><DestinationCard destination={destination}/></Grid>
 
                                 ))
                             ) : (
                                 <React.Fragment>
                                     {
                                         [...Array(16)].map((e, i) => (
-                                            <Grid size={{ sm: 6, md: 4, lg: 3 }} item key={"skeleton-c-" + i}>
+                                            <Grid size={{ sm: 6, md: 4, lg: 3 }} key={"skeleton-c-" + i}>
                                                 <SkeletonDestinationCard/>
                                             </Grid>
                                         ))
@@ -40,7 +40,7 @@ const DestinationGrid = ({destinations}) => {
                   sx={{position: "relative"}}>
                 {destinations &&
                 destinations.map((post, i) => (
-                    <Grid item key={"mobile-destinations-" + i}><MobileDestinationCard post={post}/></Grid>
+                    <Grid key={"mobile-destinations-" + i}><MobileDestinationCard post={post}/></Grid>
                 ))}
             </Grid>
         )

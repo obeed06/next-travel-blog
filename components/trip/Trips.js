@@ -41,7 +41,7 @@ const Trips = ({ trips }) => {
                 })}
             </Stack>
             <Container maxWidth='lg' sx={{ pb: 5 }}>
-                <Grid container item direction="row" justifyContent="flex-end" alignItems="center" sx={{ pt: 3 }}>
+                <Grid container direction="row" justifyContent="flex-end" alignItems="center" sx={{ pt: 3 }}>
                     <Button style={{ zIndex: 5 }} component={Link} href="/destinations" variant="contained" endIcon={<DoubleArrowIcon />}>ALL DESTINATIONS</Button>
                 </Grid>
             </Container>

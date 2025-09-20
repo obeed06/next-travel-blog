@@ -72,7 +72,7 @@ export default function Post({ post, nestedHeadings }) {
                         <Container maxWidth='lg' sx={{ my: 5 }}>
                             <DestinationBreadcrumbs destinations={post?.destinations} />
                             <Grid container spacing={2}>
-                                <Grid item size={{ xs: 12, md: 8 }}>
+                                <Grid size={{ xs: 12, md: 8 }}>
                                     <Box ref={postBodyBottomRef} className="postContent">
                                         <span ref={postBodyTopRef}></span>
                                         <PortableText value={post?.body} components={DefaultBlockContent} />

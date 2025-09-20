@@ -56,7 +56,7 @@ export default function Destination({ destination, relatedPosts, preview }) {
                             )}>
                             <Grid sx={{ height: "100%" }} container direction="column" justifyContent="center"
                                 alignItems="center">
-                                <Grid item className="dIcon" style={{ width: '60%', height: '60%' }}>
+                                <Grid className="dIcon" style={{ width: '60%', height: '60%' }}>
                                     <div className="dIconBg"
                                         style={{ backgroundImage: "url(" + destination?.icon?.asset?.url + ")" }}></div>
                                     <Typography vairant="h1" component="h1" style={{
@@ -68,14 +68,14 @@ export default function Destination({ destination, relatedPosts, preview }) {
                                         {destination?.name}
                                     </Typography>
                                 </Grid>
-                                <Grid item sx={{ pb: 3 }}>
+                                <Grid sx={{ pb: 3 }}>
                                     <Container maxWidth="sm">
                                         <Typography vairant="p" component="p">
                                             {destination?.summary}
                                         </Typography>
                                     </Container>
                                 </Grid>
-                                <Grid item>
+                                <Grid>
                                     <Scroll to="destination-content" smooth={true}>
                                         <Button variant="contained"
                                             endIcon={<ArrowDownwardIcon />}>Explore {destination?.name}</Button>

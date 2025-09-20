@@ -52,7 +52,7 @@ const Destinations = ({ destinations, continents, preview }) => {
                             }
                         </Box>
                         <Grid container direction="row" justifyContent="center" alignItems="center">
-                            <Grid item size={{ xs: 12, md: 8 }}>
+                            <Grid size={{ xs: 12, md: 8 }}>
                                 <FormControl fullWidth sx={{ m: 1 }}>
                                     <OutlinedInput
                                         onChange={(e) => {

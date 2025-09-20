@@ -18,7 +18,7 @@ export default function PostsSection({ posts }) {
     let sectionBGUrl = featuredPosts[0]?.mainImage?.asset?.url;
 
     const olderPostBtn = (
-        <Grid container item direction="row" justifyContent="flex-end" alignItems="center" sx={{ pt: 3 }}>
+        <Grid container direction="row" justifyContent="flex-end" alignItems="center" sx={{ pt: 3 }}>
             <Button component={Link} href="/posts" variant="outlined" endIcon={<DoubleArrowIcon />}>OLDER POSTS</Button>
         </Grid>
     );

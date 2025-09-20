@@ -62,7 +62,7 @@ export default function Form({ _id }) {
             <Box component="form" noValidate onSubmit={handleSubmit(onSubmit)}>
                 <input {...register("_id")} type="hidden" name="_id" value={_id} />
                 <Grid container spacing={2}>
-                    <Grid item size={{ xs: 12, sm: 6 }}>
+                    <Grid size={{ xs: 12, sm: 6 }}>
                         <Controller
                             name={"name"}
                             control={control}
@@ -78,7 +78,7 @@ export default function Form({ _id }) {
                             )}
                         />
                     </Grid>
-                    <Grid item size={{ xs: 12, sm: 6 }}>
+                    <Grid size={{ xs: 12, sm: 6 }}>
                         <Controller
                             name={"email"}
                             control={control}
@@ -95,7 +95,7 @@ export default function Form({ _id }) {
                         />
 
                     </Grid>
-                    <Grid item size={{ xs: 12 }}>
+                    <Grid size={{ xs: 12 }}>
                         <Controller
                             name={"comment"}
                             control={control}

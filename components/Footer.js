@@ -22,7 +22,7 @@ const Footer = () => {
     return (
         <Box className="siteFooter" sx={{ width: '100%' }}>
             <Grid container direction="row" justifyContent="space-around" spacing={{ xs: 1, md: 3 }} sx={{ py: 5 }}>
-                <Grid item>
+                <Grid>
                     <h6 style={{ textAlign: "center" }}>QUICK LINKS</h6>
                     <List dense={true}>
                         <ListItem key="footer-link-about"><Link href="/about" underline="none">About Me</Link></ListItem>
@@ -31,7 +31,7 @@ const Footer = () => {
                         <ListItem key="footer-link-blog"><Link href="/posts" underline="none">Blog</Link></ListItem>
                     </List>
                 </Grid>
-                <Grid item>
+                <Grid>
                     <h6 style={{ textAlign: "center" }}>STAY CONNECTED</h6>
                     <IconButton href="https://github.com/obeed06" target="_blank"><FontAwesomeIcon icon={['fab', 'github']} /></IconButton>
                     <IconButton href="https://www.instagram.com/wheresobee/" target="_blank"><FontAwesomeIcon icon={['fab', 'instagram']} /></IconButton>
@@ -51,7 +51,7 @@ const Footer = () => {
                         <Avatar alt="David Obee" src={'/assets/avatar.jpg'} style={{ display: "inline-block" }} sx={{ width: 24, height: 24, mx: 1 }} />
                     </Tooltip>
                 </Stack>
-                <Grid item>
+                <Grid>
                     <IconButton sx={{ ml: 1 }} onClick={() => setDarkMode(!darkMode)} color="inherit">
                         <Chip icon={theme.palette.mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />} label={theme.palette.mode === "dark" ? 'Light Mode' : 'Dark Mode'} />
                     </IconButton>

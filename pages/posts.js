@@ -49,7 +49,7 @@ const Posts = ({ posts, categories, preview }) => {
                 Posts.
             </Typography>
             <Grid container direction="row" justifyContent="center" alignItems="center">
-                <Grid item size={{ xs: 12, md: 8 }}>
+                <Grid size={{ xs: 12, md: 8 }}>
                     <FormControl fullWidth>
                         <OutlinedInput
                             onChange={(e) => {
