@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
-import Moment from "moment";
+import { format } from "date-fns";
 import Skeleton from "@mui/material/Skeleton";
 import Container from "@mui/material/Container";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
@@ -65,7 +65,7 @@ export default function Post({ post, nestedHeadings }) {
                                     </Typography>
                                     <Divider style={{ borderColor: "rgba(255, 255, 255, 0.15)", width: "75%" }} />
                                     <span
-                                        className={styles.postCardAuthor}>By {post?.author?.name} on {Moment(post?.publishedAt).format('DD MMMM YYYY')}</span>
+                                        className={styles.postCardAuthor}>By {post?.author?.name} on {format(post?.publishedAt, 'dd MMM yyyy')}</span>
                                 </Stack>
                             </Grid>
                         </Box>

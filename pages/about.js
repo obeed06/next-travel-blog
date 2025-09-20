@@ -6,7 +6,7 @@ import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
-import Moment from "moment";
+import { format } from "date-fns";
 import Typed from "typed.js";
 import Avatar from "@mui/material/Avatar";
 import DefaultBlockContent from "../components/DefaultBlockContent";
@@ -16,7 +16,6 @@ import HeaderAndFooter from "../components/HeaderAndFooter";
 import Meta from "../components/Meta";
 
 export default function About({ author, preview }) {
-    Moment.locale('en')
     const containerRef = useRef(null);
     const el = useRef(null);
 
@@ -78,7 +77,7 @@ export default function About({ author, preview }) {
                                 <Typography className={styles.statTitle} variant="h5" component="h5">
                                     Years Travelled:
                                 </Typography>
-                                <em className={styles.statNumber}>{new Date().getFullYear() - Moment(author?.earliestTrip?.tripDate).year()}+</em>
+                                <em className={styles.statNumber}>{new Date().getFullYear() - format(author?.earliestTrip?.tripDate, 'yyyy')}+</em>
                             </div>
                             <div>
                                 <Typography className={styles.statTitle} variant="h5" component="h5">

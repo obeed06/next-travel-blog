@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import Typography from "@mui/material/Typography";
 import { Card, CardMedia, CardContent, CardActionArea } from '@mui/material';
 import Divider from "@mui/material/Divider";
-import Moment from "moment";
+import { format } from "date-fns";
 import PostTags from "./PostTags";
 import Link from "../../src/Link";
 
 export default function PostCard({ post }) {
-    Moment.locale('en')
     const [isHovered, setIsHovered] = useState(false);
 
     return (
@@ -42,7 +41,7 @@ export default function PostCard({ post }) {
                         </Typography>
                         <Divider sx={{ my: 1, borderColor: "rgba(255, 255, 255, 0.15)" }} />
                         <span
-                            className="postCardAuthor">By {post.author.name} on {Moment(post.publishedAt).format('DD MMMM YYYY')}</span>
+                            className="postCardAuthor">By {post.author.name} on {format(post.publishedAt, 'dd MMM yyyy')}</span>
                     </CardContent>
                 </CardActionArea>
             </Card>
