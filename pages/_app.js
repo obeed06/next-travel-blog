@@ -57,7 +57,7 @@ export default function MyApp(props) {
                 <meta name="viewport" content="initial-scale=1, width=device-width" />
                 <style>
                     @import
-                    url('https://fonts.googleapis.com/css2?family=Bungee&family=Bungee+Outline&family=Nunito+Sans:wght@900&family=Roboto:wght@100;300&family=Teko:wght@700&display=swap');
+                    url(&#39;https://fonts.googleapis.com/css2?family=Bungee&family=Bungee+Outline&family=Nunito+Sans:wght@900&family=Roboto:wght@100;300&family=Teko:wght@700&display=swap&#39;);
                 </style>
             </Head>
             <ColorModeContext.Provider value={{ darkMode, setDarkMode: _setDarkMode }}>
