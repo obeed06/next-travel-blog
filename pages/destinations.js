@@ -76,19 +76,53 @@ const Destinations = ({ destinations, continents, preview }) => {
                                         scrollButtons="auto"
                                         aria-label="scrollable auto tabs example"
                                     >
-                                        <Tab key="all-continents" label="All" value="All" />
-                                        <Divider sx={{ mx: 1 }} orientation="vertical" variant="middle" flexItem />
-                                        {continents.map((c, i) => <Tab data-type="continent"
-                                            key={c?.name + "-filter"} value={c?.name}
-                                            label={c?.name} />)
+                                        <Tab key="all-continents"
+                                            label="All"
+                                            value="All"
+                                            sx={{
+                                                position: 'relative',
+                                                paddingRight: 2,
+                                                '&::after': {
+                                                    content: '""',
+                                                    position: 'absolute',
+                                                    top: '50%',
+                                                    right: 0,
+                                                    transform: 'translateY(-50%)',
+                                                    height: '50%',
+                                                    width: '1px',
+                                                    backgroundColor: 'divider',
+                                                },
+                                            }} />
+                                        {continents.map((c, i) =>
+                                            <Tab data-type="continent"
+                                                key={c?.name + "-filter"}
+                                                value={c?.name}
+                                                label={c?.name}
+                                                sx={{
+                                                    ...(i === continents.length - 1 && {
+                                                        position: 'relative',
+                                                        paddingRight: 2,
+                                                        '&::after': {
+                                                            content: '""',
+                                                            position: 'absolute',
+                                                            top: '50%',
+                                                            right: 0,
+                                                            transform: 'translateY(-50%)',
+                                                            height: '50%',
+                                                            width: '1px',
+                                                            backgroundColor: 'divider',
+                                                        },
+                                                    }),
+                                                }} />)
                                         }
-                                        <Divider sx={{ mx: 1 }} orientation="vertical" variant="middle" flexItem />
                                         {
                                             continents.flatMap((c, i) => c.regions)
-                                                .map((c, i) => <Tab
-                                                    data-type="sub-region" key={c?.name + "-filter"} value={c?.name}
-                                                    label={c?.name} />)
-
+                                                .map((c, i) =>
+                                                    <Tab data-type="sub-region"
+                                                        key={c?.name + "-filter"}
+                                                        value={c?.name}
+                                                        label={c?.name} />
+                                                )
                                         }
                                     </Tabs>
                                     :

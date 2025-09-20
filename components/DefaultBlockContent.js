@@ -3,6 +3,36 @@ import { sanityClient } from "../lib/sanity";
 import Link from "../src/Link";
 import { useNextSanityImage } from "next-sanity-image";
 import Image from "next/image";
+import { Typography } from "@mui/material";
+
+const Figure = props => {
+    const imageProps = useNextSanityImage(
+        sanityClient,
+        props.value
+    );
+
+    if (!imageProps) return null;
+
+    return (
+        <figure style={{ margin: '2rem 0' }}>
+            <Image
+                {...imageProps}
+                alt={props.value.alt || ' '}
+                sizes="(max-width: 800px) 100vw, 800px"
+                style={{
+                    width: "100%",
+                    height: "auto",
+                    borderRadius: "4px"
+                }}
+            />
+            {props.value.caption && (
+                <Typography component="figcaption" variant="caption" align="center">
+                    {props.value.caption}
+                </Typography>
+            )}
+        </figure>
+    );
+}
 
 const DefaultBlockContent = {
     block: {
@@ -11,7 +41,6 @@ const DefaultBlockContent = {
         h3: ({ children }) => <h3 id={hyphenate(children[0])}>{children}</h3>,
         h4: ({ children }) => <h4 id={hyphenate(children[0])}>{children}</h4>,
         h5: ({ children }) => <h5 id={hyphenate(children[0])}>{children}</h5>,
-
     },
     marks: {
         link: ({ value, children }) => {
@@ -38,32 +67,4 @@ const DefaultBlockContent = {
     }
 };
 
-const Figure = props => {
-    const imageProps = useNextSanityImage(
-        sanityClient,
-        props.value,
-        { imageBuilder: blockContentImageBuilder }
-    );
-    return (
-        <figure>
-            <Image
-                {...imageProps}
-                alt={props.value.alt || ' '}
-                sizes="(max-width: 800px) 100vw, 800px"
-                style={{
-                    width: "100%",
-                    height: "auto"
-                }} />
-            <figcaption>{props.value.caption}</figcaption>
-        </figure>
-    );
-}
-
-const blockContentImageBuilder = (imageUrlBuilder, options) => {
-    return imageUrlBuilder
-        .width(options.width || Math.min(options.originalImageDimensions.width, 800))
-        .fit('max')
-        .auto('format')
-};
-
-export default DefaultBlockContent
+export default DefaultBlockContent;

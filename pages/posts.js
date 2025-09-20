@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Box from "@mui/material/Box";
 import PostsGrid from "../components/post/PostsGrid";
 import Typography from "@mui/material/Typography";
@@ -17,7 +17,7 @@ import Container from "@mui/material/Container";
 import { useRouter } from "next/router";
 import Meta from "../components/Meta";
 
-const Posts = ({ posts, categories, preview }) => {
+const Posts = ({ posts, categories }) => {
     const [selectedCategory, setSelectedCategory] = useState("All");
     const [q, setQ] = useState("");
     const [qType, setQType] = useState("");
@@ -41,7 +41,6 @@ const Posts = ({ posts, categories, preview }) => {
             setQ(category)
         }
     }, [categories, router.query, setQ, setQType, setSelectedCategory]);
-
 
     const postFilter = (
         <Container maxWidth='lg' sx={{ pt: 10 }}>
@@ -69,10 +68,25 @@ const Posts = ({ posts, categories, preview }) => {
                 scrollButtons="auto"
                 aria-label="scrollable auto tabs example"
             >
-                <Tab key="all-categories" label="All" value="All" />
-                <Divider sx={{ mx: 1 }} orientation="vertical" variant="middle" flexItem />
+                <Tab key="all-categories"
+                    label="All"
+                    value="All"
+                    sx={{
+                        position: 'relative',
+                        paddingRight: 2,
+                        '&::after': {
+                            content: '""',
+                            position: 'absolute',
+                            top: '50%',
+                            right: 0,
+                            transform: 'translateY(-50%)',
+                            height: '50%',
+                            width: '1px',
+                            backgroundColor: 'divider',
+                        },
+                    }} />
                 {
-                    categories && categories.map((c, i) => <Tab data-type="category" key={c?.title + "-filter"}
+                    categories && categories.map((c) => <Tab data-type="category" key={c?.title + "-filter"}
                         value={c?.title}
                         label={c?.title} sx={{ color: c?.colourHex }} />)
                 }

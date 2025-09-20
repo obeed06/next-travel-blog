@@ -1,5 +1,4 @@
 import styles from '../../styles/destinations/[slug].module.css'
-import React from 'react';
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
@@ -13,13 +12,12 @@ import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Divider from "@mui/material/Divider";
 import { Link as Scroll } from "react-scroll";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
 import { deepOrange } from "@mui/material/colors";
 import Meta from "../../components/Meta";
 import urlBuilder from "@sanity/image-url";
 import { sanityClient } from "../../lib/sanity";
 import Link from "../../src/Link";
+import { Stack } from '@mui/material';
 
 export default function Destination({ destination, relatedPosts, preview }) {
     const themeProps = useTheme();
@@ -85,15 +83,24 @@ export default function Destination({ destination, relatedPosts, preview }) {
                             </Grid>
                         </Box>
                         <Container maxWidth='lg' id="destination-content">
-                            <Tabs variant="scrollable"
-                                scrollButtons="auto"
-                                aria-label="related destinations links">
+                            <Stack
+                                direction="row"
+                                spacing={1}
+                                sx={{
+                                    overflowX: 'auto',
+                                    '&::-webkit-scrollbar': {
+                                        display: 'none'
+                                    },
+                                    'msOverflowStyle': 'none',
+                                    'scrollbarWidth': 'none'
+                                }}
+                            >
                                 {getPickDestinationTab(destination?.relatedDestinations, 'Pick a region')}
                                 {getPickDestinationTab(destination?.regions, 'Pick a region')}
-                                {getPickDestinationTab(destination?.countries, 'Pick a country')}
+                                {getPickDestinationTab(destination?.countries, 'Pick a destination')}
                                 {getPickDestinationTab(destination?.areas, 'Pick an area')}
                                 {getPickTrips(destination?.trips)}
-                            </Tabs>
+                            </Stack>
                             <Divider />
                         </Container>
                         <span className="sections">
@@ -111,8 +118,7 @@ export default function Destination({ destination, relatedPosts, preview }) {
                 ) : (
                     <Box>
                         <Box className={styles.destinationLanding}>
-                            <Grid sx={{ height: "100%" }} container direction="row" justifyContent="center"
-                                alignItems="center">
+                            <Grid sx={{ height: "100%" }} container direction="row" justifyContent="center" alignItems="center">
                                 <Skeleton height={80} width={"40%"} />
                             </Grid>
                         </Box>
@@ -122,45 +128,101 @@ export default function Destination({ destination, relatedPosts, preview }) {
     </>
 };
 
-function LinkTab(props) {
+function LinkButton({ href, label }) {
     return (
-        <Tab
-            component={Link}
-            sx={{
-                borderBottom: "2px solid transparent",
-                ":hover": {
-                    borderBottom: "2px solid " + deepOrange["500"]
-                }
-            }}
-            {...props}
-        />
+        <Link href={href} underline="none">
+            <Button
+                variant="text"
+                sx={{
+                    color: 'text.secondary',
+                    textTransform: 'uppercase',
+                    fontWeight: 400,
+                    alignSelf: 'center',
+                    whiteSpace: 'nowrap',
+                    borderBottom: '2px solid transparent',
+                    borderRadius: 0,
+                    transition: (theme) => theme.transitions.create('border-color', {
+                        duration: theme.transitions.duration.short,
+                    }),
+                    '&:hover': {
+                        borderBottomColor: deepOrange[500],
+                        backgroundColor: 'transparent'
+                    }
+                }}
+            >
+                {label}
+            </Button>
+        </Link>
     );
 }
 
 function getPickDestinationTab(destinations, label) {
-    if (!Array.isArray(destinations) || destinations.length === 0)
-        return;
-    return <>
-        <Tab disabled sx={{ textTransform: "uppercase" }} label={label} />
-        <Divider sx={{ mx: 1 }} orientation="vertical" variant="middle" flexItem />
-        {Array.isArray(destinations) && destinations.map(destination => (
-            <LinkTab key={destination?.name} style={{ zIndex: 5 }} label={destination?.name}
+    if (!Array.isArray(destinations) || destinations.length === 0) {
+        return [];
+    }
+
+    return [
+        <Typography
+            key={label}
+            sx={{
+                textTransform: "uppercase",
+                color: 'text.secondary',
+                alignSelf: 'center',
+                whiteSpace: 'nowrap',
+                position: 'relative',
+                paddingRight: 2,
+                '&::after': {
+                    content: '""',
+                    position: 'absolute',
+                    top: '50%',
+                    right: 0,
+                    transform: 'translateY(-50%)',
+                    height: '75%',
+                    width: '1px',
+                    backgroundColor: 'divider',
+                },
+            }}>
+            {label}
+        </Typography>,
+        ...destinations.map(destination => (
+            <LinkButton key={destination?.name} style={{ zIndex: 5 }} label={destination?.name}
                 href={"/destinations/" + destination?.slug} />
-        ))}
-    </>
+        ))
+    ];
 }
 
 function getPickTrips(trips) {
-    if (!Array.isArray(trips) || trips.length === 0)
-        return;
+    if (!Array.isArray(trips) || trips.length === 0) {
+        return [];
+    }
 
-    return <>
-        <Tab disabled sx={{ textTransform: "uppercase" }} label="See in trips" />
-        <Divider sx={{ mx: 1 }} orientation="vertical" variant="middle" flexItem />
-        {Array.isArray(trips) && trips.map(trip => (
-            <LinkTab key={trip?.name} style={{ zIndex: 5 }} label={trip?.name} href={"/trips/" + trip?.slug} />
-        ))}
-    </>
+    return [
+        <Typography
+            key="trips-label"
+            sx={{
+                textTransform: "uppercase",
+                color: 'text.secondary',
+                alignSelf: 'center',
+                whiteSpace: 'nowrap',
+                position: 'relative',
+                paddingRight: 2,
+                '&::after': {
+                    content: '""',
+                    position: 'absolute',
+                    top: '50%',
+                    right: 0,
+                    transform: 'translateY(-50%)',
+                    height: '75%',
+                    width: '1px',
+                    backgroundColor: 'divider',
+                },
+            }}>
+            See in trips
+        </Typography>,
+        ...trips.map(trip => (
+            <LinkButton key={trip?.name} style={{ zIndex: 5 }} label={trip?.name} href={"/trips/" + trip?.slug} />
+        ))
+    ];
 }
 
 export const getServerSideProps = async (pageContext, preview = false) => {
