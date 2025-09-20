@@ -4,12 +4,10 @@ import clsx from 'clsx';
 import { useRouter } from 'next/router';
 import NextLink from 'next/link';
 import MuiLink from '@mui/material/Link';
-import { styled } from '@mui/material/styles';
 
-// Add support for the sx prop for consistency with the other branches.
-const Anchor = styled('a')({});
-
-export const NextLinkComposed = React.forwardRef(function NextLinkComposed(props, ref) {
+// This component is a simple wrapper around NextLink that forwards props.
+// It's used by the main Link component.
+const NextLinkComposed = React.forwardRef(function NextLinkComposed(props, ref) {
     const { to, linkAs, replace, scroll, shallow, prefetch, locale, ...other } = props;
 
     return (
@@ -20,47 +18,36 @@ export const NextLinkComposed = React.forwardRef(function NextLinkComposed(props
             replace={replace}
             scroll={scroll}
             shallow={shallow}
-            passHref
             locale={locale}
-        >
-            <Anchor ref={ref} {...other} />
-        </NextLink>
+            passHref
+            ref={ref}
+            {...other}
+        />
     );
 });
 
 NextLinkComposed.propTypes = {
-    href: PropTypes.any,
-    linkAs: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    locale: PropTypes.string,
-    passHref: PropTypes.bool,
-    prefetch: PropTypes.bool,
+    to: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
+    linkAs: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     replace: PropTypes.bool,
     scroll: PropTypes.bool,
     shallow: PropTypes.bool,
-    to: PropTypes.oneOfType([PropTypes.object, PropTypes.string]).isRequired,
+    prefetch: PropTypes.bool,
+    locale: PropTypes.string,
 };
 
-// A styled version of the Next.js Link component:
-// https://nextjs.org/docs/api-reference/next/link
-const Link = React.forwardRef(function Link(props, ref, ) {
+// The main Link component that you'll use throughout your app.
+const Link = React.forwardRef(function Link(props, ref) {
     const {
         activeClassName = 'active',
         as,
         className: classNameProps,
         href,
-        linkAs: linkAsProp,
-        locale,
-        noLinkStyle,
-        prefetch,
-        replace,
-        role, // Link don't have roles.
-        scroll,
-        shallow,
         ...other
     } = props;
 
     const router = useRouter();
-    const pathname = typeof href === 'string' ? href : href?.pathname;
+    const pathname = typeof href === 'string' ? href : href.pathname;
     const className = clsx(classNameProps, {
         [activeClassName]: router.pathname === pathname && activeClassName,
     });
@@ -69,26 +56,16 @@ const Link = React.forwardRef(function Link(props, ref, ) {
         typeof href === 'string' && (href.indexOf('http') === 0 || href.indexOf('mailto:') === 0);
 
     if (isExternal) {
-        if (noLinkStyle) {
-            return <Anchor className={className} href={href} ref={ref} {...other} />;
-        }
-
         return <MuiLink className={className} href={href} ref={ref} {...other} />;
-    }
-
-    const linkAs = linkAsProp || as;
-    const nextjsProps = { to: href, linkAs, replace, scroll, shallow, prefetch, locale };
-
-    if (noLinkStyle) {
-        return <NextLinkComposed className={className} ref={ref} {...nextjsProps} {...other} />;
     }
 
     return (
         <MuiLink
-            component={NextLinkComposed}
+            component={NextLink}
+            href={href}
+            as={as}
             className={className}
             ref={ref}
-            {...nextjsProps}
             {...other}
         />
     );
@@ -96,17 +73,9 @@ const Link = React.forwardRef(function Link(props, ref, ) {
 
 Link.propTypes = {
     activeClassName: PropTypes.string,
-    as: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
+    as: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     className: PropTypes.string,
-    href: PropTypes.any,
-    linkAs: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    locale: PropTypes.string,
-    noLinkStyle: PropTypes.bool,
-    prefetch: PropTypes.bool,
-    replace: PropTypes.bool,
-    role: PropTypes.string,
-    scroll: PropTypes.bool,
-    shallow: PropTypes.bool,
+    href: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
 };
 
 export default Link;

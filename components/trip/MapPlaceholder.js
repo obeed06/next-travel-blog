@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import TravelExploreRoundedIcon from "@mui/icons-material/TravelExploreRounded";
-import Img from 'next/image';
+import Img from "next/image";
 import { useNextSanityImage } from 'next-sanity-image';
 import { sanityClient } from "../../lib/sanity";
 
@@ -27,10 +27,12 @@ const MapPlaceholder = ({ data, loadMap }) => {
                 <Img
                     className={styles.mapPlaceholder}
                     {...imageProps}
-                    layout="responsive"
-                    sizes="(max-width: 800px) 100vw, 800px"
                     alt={data.placeholder?.alt || "travel map placeholder"}
-                />
+                    sizes="(max-width: 800px) 100vw, 800px"
+                    style={{
+                        width: "100%",
+                        height: "auto"
+                    }} />
             )}
             <div className={styles.overlay}
                 onMouseOver={() => setState({ raised: true })}

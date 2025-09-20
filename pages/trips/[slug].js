@@ -1,16 +1,16 @@
 import styles from '../../styles/trips/[slug].module.css'
-import React from 'react';
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import DestinationsSection from "../../components/destination/DestinationsSection";
 import ItineraryMap from "../../components/trip/ItineraryMap";
 import PostsGrid from "../../components/post/PostsGrid";
-import { useTheme } from "@mui/styles";
+import { useTheme } from '@mui/material/styles';
 import Skeleton from "@mui/material/Skeleton";
 import { getTripAndRelatedPosts } from "../../lib/tripApi";
 import HeaderAndFooter from "../../components/HeaderAndFooter";
 import Container from "@mui/material/Container";
+import DefaultBlockContent from "../../components/DefaultBlockContent";
 import { PortableText } from "@portabletext/react";
 import urlBuilder from "@sanity/image-url";
 import { sanityClient } from "../../lib/sanity";
@@ -59,7 +59,7 @@ export default function Trip({ trip, relatedPosts }) {
                         {trip?.summary ? (
                             <Container maxWidth='sm'
                                 sx={{ pt: 5, textAlign: 'center', fontFamily: 'var(--font-heading-primary)' }}>
-                                <PortableText value={trip?.summary} />
+                                <PortableText value={trip?.summary} components={DefaultBlockContent}/>
                             </Container>
                         ) : ""}
 
@@ -74,7 +74,7 @@ export default function Trip({ trip, relatedPosts }) {
                                 <Typography vairant="h1" component="h2" className="sectionHeader">
                                     Breakdown.
                                 </Typography>
-                                <PortableText value={trip?.breakdown} />
+                                <PortableText value={trip?.breakdown} components={DefaultBlockContent} />
                             </Container>
                         ) : ""}
 

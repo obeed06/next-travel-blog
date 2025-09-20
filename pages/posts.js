@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import Box from "@mui/material/Box";
 import PostsGrid from "../components/post/PostsGrid";
 import Typography from "@mui/material/Typography";
-import {getAllPosts} from "../lib/postApi";
+import { getAllPosts } from "../lib/postApi";
 import HeaderAndFooter from "../components/HeaderAndFooter";
-import {getCategories} from "../lib/categoryApi";
+import { getCategories } from "../lib/categoryApi";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Divider from "@mui/material/Divider";
@@ -14,10 +14,10 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import InputAdornment from "@mui/material/InputAdornment";
 import SearchIcon from "@mui/icons-material/Search";
 import Container from "@mui/material/Container";
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
 import Meta from "../components/Meta";
 
-const Posts = ({posts, categories,  preview}) => {
+const Posts = ({ posts, categories }) => {
     const [selectedCategory, setSelectedCategory] = useState("All");
     const [q, setQ] = useState("");
     const [qType, setQType] = useState("");
@@ -42,14 +42,13 @@ const Posts = ({posts, categories,  preview}) => {
         }
     }, [categories, router.query, setQ, setQType, setSelectedCategory]);
 
-
     const postFilter = (
-        <Container maxWidth='lg' sx={{pt: 10}}>
-            <Typography vairant="h1" component="h2" className="sectionHeader" sx={{pt: 10, textAlign: "center"}}>
+        <Container maxWidth='lg' sx={{ pt: 10 }}>
+            <Typography vairant="h1" component="h2" className="sectionHeader" sx={{ pt: 10, textAlign: "center" }}>
                 Posts.
             </Typography>
             <Grid container direction="row" justifyContent="center" alignItems="center">
-                <Grid item xs={12} md={8}>
+                <Grid size={{ xs: 12, md: 8 }}>
                     <FormControl fullWidth>
                         <OutlinedInput
                             onChange={(e) => {
@@ -57,27 +56,42 @@ const Posts = ({posts, categories,  preview}) => {
                                 setQType("search")
                                 setQ(e.target.value);
                             }}
-                            endAdornment={<InputAdornment position="start"><SearchIcon/></InputAdornment>}
+                            endAdornment={<InputAdornment position="start"><SearchIcon /></InputAdornment>}
                             placeholder="Search for a post"
                         />
                     </FormControl>
                 </Grid>
             </Grid>
             <Tabs value={selectedCategory}
-                  onChange={handleTabChange}
-                  variant="scrollable"
-                  scrollButtons="auto"
-                  aria-label="scrollable auto tabs example"
+                onChange={handleTabChange}
+                variant="scrollable"
+                scrollButtons="auto"
+                aria-label="scrollable auto tabs example"
             >
-                <Tab key="all-categories" label="All" value="All"/>
-                <Divider sx={{mx: 1}} orientation="vertical" variant="middle" flexItem/>
+                <Tab key="all-categories"
+                    label="All"
+                    value="All"
+                    sx={{
+                        position: 'relative',
+                        paddingRight: 2,
+                        '&::after': {
+                            content: '""',
+                            position: 'absolute',
+                            top: '50%',
+                            right: 0,
+                            transform: 'translateY(-50%)',
+                            height: '50%',
+                            width: '1px',
+                            backgroundColor: 'divider',
+                        },
+                    }} />
                 {
-                    categories && categories.map((c, i) => <Tab data-type="category" key={c?.title + "-filter"}
-                                                                value={c?.title}
-                                                                label={c?.title} sx={{color: c?.colourHex}}/>)
+                    categories && categories.map((c) => <Tab data-type="category" key={c?.title + "-filter"}
+                        value={c?.title}
+                        label={c?.title} sx={{ color: c?.colourHex }} />)
                 }
             </Tabs>
-            <Divider/>
+            <Divider />
         </Container>
     )
 
@@ -85,8 +99,8 @@ const Posts = ({posts, categories,  preview}) => {
         <Meta title={"Read about my travels | Where's Obee Blog"} />
         <HeaderAndFooter>
             {postFilter}
-            <Box id="postsSection" className="section" sx={{pb: 5}}>
-                <PostsGrid postsData={searchPosts(posts, q, qType)} checked={true}/>
+            <Box id="postsSection" className="section" sx={{ pb: 5 }}>
+                <PostsGrid postsData={searchPosts(posts, q, qType)} checked={true} />
             </Box>
         </HeaderAndFooter>
     </>
@@ -115,11 +129,11 @@ function searchPosts(posts, q, qType) {
     });
 }
 
-export async function getStaticProps({preview = false}) {
+export async function getStaticProps({ preview = false }) {
     const posts = await getAllPosts(preview)
     const categories = await getCategories(preview)
     return {
-        props: {posts, categories,  preview},
+        props: { posts, categories, preview },
         revalidate: 1
     }
 }

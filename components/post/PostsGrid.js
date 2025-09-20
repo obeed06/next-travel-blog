@@ -9,7 +9,7 @@ import HeroPostCard from "./HeroPostCard";
 import SkeletonPostCard from "./SkeletonPostCard";
 import SkeletonHeroPostCard from "./SkeletonHeroPostCard";
 
-export default function PostsGrid({postsData, checked, header, actions}) {
+export default function PostsGrid({ postsData, checked, header, actions }) {
     const matches = useMediaQuery('(min-width:656px)');
 
     if (Array.isArray(postsData) && postsData.length === 0)
@@ -21,34 +21,31 @@ export default function PostsGrid({postsData, checked, header, actions}) {
                 <Container maxWidth='lg'>
                     {header}
                     <Grid container direction="row" justifyContent="flex-start"
-                          spacing={2} sx={{position: "relative"}}>
+                        spacing={2} sx={{ position: "relative" }}>
                         {
                             postsData ?
                                 (
                                     postsData.map((post, i) => {
                                         if (i === 0)
                                             return (
-                                                <>
-                                                    <Grid sm={12} item key={i}>
-                                                        <HeroPostCard post={post}/>
-                                                    </Grid>
-                                                </>
-
+                                                <Grid size={{ sm: 12 }} key={i}>
+                                                    <HeroPostCard post={post} />
+                                                </Grid>
                                             );
                                         return (
-                                            <Grid sm={6} md={4} lg={3} item key={i}><PostCard post={post} key={i}
-                                                                                              checked={checked}/></Grid>
+                                            <Grid size={{ sm: 6, md: 4, lg: 3 }} key={i}><PostCard post={post} key={i}
+                                                checked={checked} /></Grid>
                                         );
                                     })
                                 ) : (
                                     <React.Fragment>
-                                        <Grid sm={12} item key="skeleton-hfp">
-                                            <SkeletonHeroPostCard/>
+                                        <Grid size={{ sm: 12 }} key="skeleton-hfp">
+                                            <SkeletonHeroPostCard />
                                         </Grid>
                                         {
                                             [...Array(8)].map((e, i) => (
-                                                <Grid sm={6} md={4} lg={3} item key={"skeleton-p-" + i}>
-                                                    <SkeletonPostCard/>
+                                                <Grid size={{ sm: 6, md: 4, lg: 3 }} key={"skeleton-p-" + i}>
+                                                    <SkeletonPostCard />
                                                 </Grid>
                                             ))
                                         }
@@ -62,11 +59,11 @@ export default function PostsGrid({postsData, checked, header, actions}) {
                 <>
                     {header}
                     <Grid container direction="column" justifyContent="flex-start" alignItems="stretch"
-                          sx={{position: "relative"}}>
+                        sx={{ position: "relative" }}>
                         {postsData &&
-                        postsData.map((post, i) => (
-                            <Grid item key={"mobile-post-" + i}><MobilePostCard post={post}/></Grid>
-                        ))}
+                            postsData.map((post, i) => (
+                                <Grid key={"mobile-post-" + i}><MobilePostCard post={post} /></Grid>
+                            ))}
                         {actions}
                     </Grid>
                 </>
