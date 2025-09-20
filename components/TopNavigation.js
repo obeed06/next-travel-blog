@@ -17,8 +17,8 @@ import Chip from "@mui/material/Chip";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
-import {useTheme} from "@mui/styles";
-import {useContext} from "react";
+import { useTheme } from '@mui/material/styles';
+import { useContext } from "react";
 import ColorModeContext from "../src/ColorModeContext";
 import Image from "next/image";
 
@@ -36,7 +36,7 @@ const pages = [{
 const drawerWidth = 240;
 
 function HideOnScroll(props) {
-    const {children} = props;
+    const { children } = props;
     const trigger = useScrollTrigger();
 
     return (
@@ -48,7 +48,7 @@ function HideOnScroll(props) {
 
 const TopNavigation = props => {
     const theme = useTheme();
-    const {darkMode, setDarkMode} = useContext(ColorModeContext);
+    const { darkMode, setDarkMode } = useContext(ColorModeContext);
     const [mobileNavOpen, setMobileNavOpen] = React.useState(false);
     // const container = window !== undefined ? () => window.document.body : undefined;
 
@@ -58,19 +58,19 @@ const TopNavigation = props => {
 
     const mobileNavDrawer = (
         <>
-            <Toolbar/>
-            <Divider/>
-            <List sx={{flexGrow: 1, height: "100%"}}>
+            <Toolbar />
+            <Divider />
+            <List sx={{ flexGrow: 1, height: "100%" }}>
                 {pages.map((page, index) =>
                     <ListItemButton key={"mobile-nav-" + page.title}>
-                        <Link href={page.href} underline="none"><ListItemText primary={page.title}/></Link>
+                        <Link href={page.href} underline="none"><ListItemText primary={page.title} /></Link>
                     </ListItemButton>
                 )}
             </List>
-            <Divider/>
-            <IconButton sx={{ml: 1}} onClick={() => setDarkMode(!darkMode)} color="inherit">
-                <Chip icon={theme.palette.mode === "dark" ? <Brightness7Icon/> : <Brightness4Icon/>}
-                      label={theme.palette.mode === "dark" ? 'Light Mode' : 'Dark Mode'}/>
+            <Divider />
+            <IconButton sx={{ ml: 1 }} onClick={() => setDarkMode(!darkMode)} color="inherit">
+                <Chip icon={theme.palette.mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
+                    label={theme.palette.mode === "dark" ? 'Light Mode' : 'Dark Mode'} />
             </IconButton>
         </>
     );
@@ -81,11 +81,11 @@ const TopNavigation = props => {
             <HideOnScroll>
                 <AppBar className={styles.appbar} elevation={0}>
                     <Toolbar className={styles.appbarWrapper} disableGutters sx={{
-                        flexDirection: {xs: 'row', md: 'row'},
-                        justifyContent: {xs: 'center', md: 'flex-start'}
+                        flexDirection: { xs: 'row', md: 'row' },
+                        justifyContent: { xs: 'center', md: 'flex-start' }
                     }}>
                         {/*Desktop Logo*/}
-                        <Link sx={{mr: 2, display: {xs: 'none', md: 'flex'}}} href={"/"}>
+                        <Link sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }} href={"/"}>
                             <Image
                                 height="65"
                                 width="65"
@@ -98,7 +98,7 @@ const TopNavigation = props => {
                         </Link>
 
                         {/*Mobile hamburger icon*/}
-                        <Box sx={{flexGrow: 1, display: {xs: 'flex', md: 'none'}, alignSelf: {xs: 'flex-start'}}}>
+                        <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, alignSelf: { xs: 'flex-start' } }}>
                             <IconButton
                                 size="large"
                                 aria-label="account of current user"
@@ -107,17 +107,17 @@ const TopNavigation = props => {
                                 onClick={handleMobileNavDrawerToggle}
                                 color="inherit"
                             >
-                                <MenuIcon/>
+                                <MenuIcon />
                             </IconButton>
                         </Box>
 
                         {/*Desktop links*/}
-                        <Box sx={{flexGrow: 1, display: {xs: 'none', md: 'flex'}}}>
+                        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                             {pages.map((page) => (
                                 <Link key={"desktop-nav-" + page.title}
-                                      href={page.href}
-                                      underline="none">
-                                    <Button sx={{my: 2, color: 'white', display: 'block'}} >
+                                    href={page.href}
+                                    underline="none">
+                                    <Button sx={{ my: 2, color: 'white', display: 'block' }} >
                                         {page.title}
                                     </Button>
                                 </Link>
@@ -126,9 +126,9 @@ const TopNavigation = props => {
 
                         {/*Mobile Logo*/}
                         <Link sx={{
-                            display: {xs: 'flex', md: 'none'},
-                            position: {xs: 'absolute', md: ''},
-                            top: {xs: '25px', md: ''}
+                            display: { xs: 'flex', md: 'none' },
+                            position: { xs: 'absolute', md: '' },
+                            top: { xs: '25px', md: '' }
                         }} href={"/"}>
                             <Image
                                 height="65"
@@ -145,7 +145,7 @@ const TopNavigation = props => {
             </HideOnScroll>
             <Box
                 component="nav"
-                sx={{width: {sm: drawerWidth}, flexShrink: {sm: 0}}}
+                sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
                 aria-label="mailbox folders"
             >
                 {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
@@ -160,8 +160,8 @@ const TopNavigation = props => {
                         keepMounted: true, // Better open performance on mobile.
                     }}
                     sx={{
-                        display: {xs: 'block', md: 'none'},
-                        '& .MuiDrawer-paper': {boxSizing: 'border-box', width: drawerWidth},
+                        display: { xs: 'block', md: 'none' },
+                        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
                     }}
                 >
                     {mobileNavDrawer}

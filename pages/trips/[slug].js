@@ -6,7 +6,7 @@ import Grid from "@mui/material/Grid";
 import DestinationsSection from "../../components/destination/DestinationsSection";
 import ItineraryMap from "../../components/trip/ItineraryMap";
 import PostsGrid from "../../components/post/PostsGrid";
-import { useTheme } from "@mui/styles";
+import { useTheme } from '@mui/material/styles';
 import Skeleton from "@mui/material/Skeleton";
 import { getTripAndRelatedPosts } from "../../lib/tripApi";
 import HeaderAndFooter from "../../components/HeaderAndFooter";

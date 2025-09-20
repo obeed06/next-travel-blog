@@ -1,46 +1,27 @@
-import React, {useState} from 'react';
-import {makeStyles} from "@mui/styles";
+import React, { useState } from 'react';
 import Grow from "@mui/material/Grow";
 import Typography from "@mui/material/Typography";
-import {Card, CardMedia, CardContent, CardActionArea} from '@mui/material';
+import { Card, CardMedia, CardContent, CardActionArea } from '@mui/material';
 
-const useStyles = makeStyles({
-    root: {
-        transition: "transform 0.15s ease-in-out",
-        minWidth: 250,
-        background: 'rgba(0,0,0,0.5)',
-    },
-    cardHovered: {
-        transform: "scale3d(1.05, 1.05, 0.5)!important"
-    },
-    media: {
-        height: 200,
-    },
-    title: {
-        fontFamily: 'var(--font-heading-primary)',
-        color: '#fff',
-    },
-    desc: {
-        fontFamily: 'var(--font-heading-primary)',
-        color: '#ddd',
-    },
-});
+export default function TripCard({ slugPrefix, item, checked, timeout = 1 }) {
+    const [isHovered, setIsHovered] = useState(false);
 
-export default function TripCard({slugPrefix, item, checked, timeout = 1}) {
-    const classes = useStyles();
-    const [state, setState] = useState({
-        raised: false,
-        shadow: 1,
-    });
     return (
-        <Grow in={checked} {...(checked ? {timeout: 500 * timeout} : {})}>
-            <Card className={classes.root} classes={{root: state.raised ? classes.cardHovered : ""}}
-                  onMouseOver={() => setState({raised: true, shadow: 3})}
-                  onMouseOut={() => setState({raised: false, shadow: 1})}
-                  raised={state.raised} zdepth={state.shadow}>
-                <CardActionArea href={slugPrefix+item.slug} key={item.slug}>
+        <Grow in={checked} {...(checked ? { timeout: 500 * timeout } : {})}>
+            <Card
+                sx={{
+                    transition: "transform 0.15s ease-in-out",
+                    minWidth: 250,
+                    background: 'rgba(0,0,0,0.5)',
+                    transform: isHovered ? "scale3d(1.05, 1.05, 1)" : "scale3d(1, 1, 1)",
+                }}
+                onMouseOver={() => setIsHovered(true)}
+                onMouseOut={() => setIsHovered(false)}
+                raised={isHovered}
+            >
+                <CardActionArea href={slugPrefix + item.slug} key={item.slug}>
                     <CardMedia
-                        className={classes.media}
+                        sx={{ height: 200 }}
                         image={item.thumbnail.asset.url}
                         alt={item.thumbnail.alt}
                     />
@@ -49,7 +30,10 @@ export default function TripCard({slugPrefix, item, checked, timeout = 1}) {
                             gutterBottom
                             variant="h5"
                             component="h4"
-                            className={classes.title}
+                            sx={{
+                                fontFamily: 'var(--font-heading-primary)',
+                                color: '#fff',
+                            }}
                         >
                             {item.name}
                         </Typography>
@@ -57,7 +41,10 @@ export default function TripCard({slugPrefix, item, checked, timeout = 1}) {
                             variant="body2"
                             color="textSecondary"
                             component="p"
-                            className={classes.desc}
+                            sx={{
+                                fontFamily: 'var(--font-heading-primary)',
+                                color: '#ddd',
+                            }}
                         >
                             {item.tagline}
                         </Typography>

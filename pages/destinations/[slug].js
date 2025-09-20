@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import PostsGrid from "../../components/post/PostsGrid";
 import Skeleton from "@mui/material/Skeleton";
-import { useTheme } from "@mui/styles";
+import { useTheme } from '@mui/material/styles';
 import { getDestinationAndRelatedPosts } from "../../lib/destinationApi";
 import HeaderAndFooter from "../../components/HeaderAndFooter";
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';

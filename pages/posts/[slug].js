@@ -8,7 +8,6 @@ import Divider from "@mui/material/Divider";
 import Moment from "moment";
 import Skeleton from "@mui/material/Skeleton";
 import Container from "@mui/material/Container";
-import { makeStyles } from "@mui/styles";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import Chip from "@mui/material/Chip";
@@ -24,17 +23,7 @@ import { sanityClient } from "../../lib/sanity";
 import urlBuilder from "@sanity/image-url";
 import Link from "../../src/Link";
 
-const useStyles = makeStyles((theme) => ({
-    postLanding: {
-        "&::after": {
-            backgroundColor: theme.palette.background.default,
-        }
-    },
-}));
-
 export default function Post({ post, nestedHeadings }) {
-    const classes = useStyles();
-    // let location = useLocation();
     const postBodyTopRef = useRef(null)
     const postBodyBottomRef = useRef(null)
 
@@ -53,8 +42,15 @@ export default function Post({ post, nestedHeadings }) {
             {
                 typeof (post) !== 'undefined' ? (
                     <Box>
-                        <Box className={`${classes.postLanding} ${styles.postLanding}`}
-                            style={{ backgroundImage: "linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2)), url(" + post?.mainImage?.asset?.url + ")" }}>
+                        <Box
+                            className={styles.postLanding}
+                            sx={{
+                                "&::after": {
+                                    backgroundColor: 'background.default',
+                                },
+                                backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2)), url(${post?.mainImage?.asset?.url})`
+                            }}
+                        >
                             <Grid sx={{ height: "100%" }} container direction="column" justifyContent="center"
                                 alignItems="center">
                                 <Stack direction="column" justifyContent="flex-end" alignItems="center" spacing={1}

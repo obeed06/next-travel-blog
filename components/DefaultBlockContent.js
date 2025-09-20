@@ -1,9 +1,8 @@
-import React from 'react';
 import { hyphenate } from "../lib/postUtils";
 import { sanityClient } from "../lib/sanity";
 import Link from "../src/Link";
 import { useNextSanityImage } from "next-sanity-image";
-import Img from "next/image";
+import Image from "next/image";
 
 const DefaultBlockContent = {
     block: {
@@ -31,13 +30,11 @@ const DefaultBlockContent = {
                 </Link>
             )
         },
-
     },
     types: {
         figure: props => {
             return Figure(props)
         },
-
     }
 };
 
@@ -47,9 +44,10 @@ const Figure = props => {
         props.value,
         { imageBuilder: blockContentImageBuilder }
     );
+    console.log('figure image props --------------', imageProps)
     return (
         <figure>
-            <Img
+            <Image
                 {...imageProps}
                 alt={props.value.alt || ' '}
                 sizes="(max-width: 800px) 100vw, 800px"
